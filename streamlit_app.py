@@ -1,3 +1,6 @@
 import streamlit as st
+import pandas
+import requests
+from urllib.error import URLError
 
-st.write('Hello world!')
+st.title('WasteDrop')
