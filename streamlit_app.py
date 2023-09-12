@@ -3,7 +3,6 @@ import pandas as pd
 from urllib.error import URLError
 import psycopg2
 
-
 st.set_page_config(
     page_title="home_page"
 )
