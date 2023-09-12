@@ -7,6 +7,11 @@ import re
 st.set_page_config(page_title="sign_up")
 st.title("welcome, please sign up below")
 
+def clear_inputs():
+    st.session_state['first_name'] = ""
+    st.session_state['last_name'] = ""
+    st.session_state['email'] = ""
+    st.session_state['password'] = ""
 
 
 
@@ -28,11 +33,7 @@ if password not in st.session_state:
     st.session_state['password']
 
 
-def clear_inputs():
-    st.session_state['first_name'] = ""
-    st.session_state['last_name'] = ""
-    st.session_state['email'] = ""
-    st.session_state['password'] = ""
+
 
 
 
