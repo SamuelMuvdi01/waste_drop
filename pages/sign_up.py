@@ -13,9 +13,13 @@ last_name = st.text_input("Please enter last name", placeholder="Doe", key="last
 email = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com", key="email")
 password = st.text_input("Please enter a password", key="password", placeholder="xxxxxxxx", help="Password must be at least 8 characters long, have an upper case letter, and have a symbol")
 create_user_button = st.button("Create account", key="create_user_button")
-#clear_button = st.button("Clear", on_click=st.empty())
+clear_button = st.button("Clear")
 pass_valid= bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$", password ))
 
 
-
+if(clear_button):
+    first_name = st.clear(),
+    last_name = st.clear(),
+    email = st.clear(),
+    password = st.clear()
 
