@@ -1,2 +1,3 @@
 #requirements.txt
 psycopg2-binary==2.9.7
+multiapp==1.0
