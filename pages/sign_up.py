@@ -18,8 +18,8 @@ pass_valid= bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}
 
 
 if(clear_button):
-    first_name = st.clear(),
-    last_name = st.clear(),
-    email = st.clear(),
-    password = st.clear()
+    first_name = st.empty(),
+    last_name = st.empty(),
+    email = st.empty(),
+    password = st.empty()
 
