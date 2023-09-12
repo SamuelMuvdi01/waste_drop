@@ -1,9 +1,4 @@
 import streamlit as st
-
-st.set_page_config(
-    page_title='home_page'
-)
-
 import pandas as pd
 from urllib.error import URLError
 import psycopg2
