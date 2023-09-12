@@ -1,2 +1,3 @@
 #requirements.txt
 psycopg2-binary==2.9.7
+streamlit-extras==0.3.2
