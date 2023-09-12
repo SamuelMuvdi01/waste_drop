@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from urllib.error import URLError
 import psycopg2
-import streamlit_authenticator as stauth
+
 
 st.set_page_config(
     page_title="home_page"
