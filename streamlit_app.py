@@ -1,8 +1,7 @@
 import streamlit as st
 import pandas as pd
-import requests
 from urllib.error import URLError
-import mysql.connector
+import psycopg2
 
 
 
@@ -13,7 +12,7 @@ st.write("Home Page")
 
 @st.cache_resource
 def init_connection():
-    return mysql.connector.connect(**st.secrets["mysql"])
+    return psycopg2.connect(**st.secrets["postgres"])
 
 conn = init_connection()
 
@@ -22,10 +21,8 @@ def run_query(query):
         cur.execute(query)
         return cur.fetchall()
     
-rows = run_query("SELECT * FROM wastedrop_db.users")
+rows = run_query("SELECT GETDATE()")
 
-for row in rows:
-    st.write(f"{row[0]} has a :{row[1]}:")
 
 
 
