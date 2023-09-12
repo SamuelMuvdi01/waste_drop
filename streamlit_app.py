@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import requests
 from urllib.error import URLError
+import mysql.connector
 
 
 
@@ -10,12 +11,21 @@ st.title('WasteDrop')
 st.write("Home Page")
 
 
-conn = st.experimental_connection('mysql', type='sql')
+@st.cache_resource
+def init_connection():
+    return mysql.connector.connect(**st.secrets["mysql"])
 
-df = conn.query('SELECT * from wastedrop_db.users')
+conn = init_connection()
 
-for row in df.itertuples():
-    st.write(f"{row.last_name}")
+def run_query(query):
+    with conn.cursor() as cur:
+        cur.execute(query)
+        return cur.fetchall()
+    
+rows = run_query("SELECT * FROM wastedrop_db.users")
+
+for row in rows:
+    st.write(f"{row[0]} has a :{row[1]}:")
 
 
 
