@@ -2,9 +2,12 @@ import streamlit as st
 import pandas as pd
 from urllib.error import URLError
 import psycopg2
+from streamlit.source_util import _on_pages_changed, get_pages
+from streamlit_extras.switch_page_button import switch_page
 
+st.set_page_config(page_title="home")
 
-st.sidebar.success("Selecta page above")
+st.sidebar.success("Sign up or login!")
 
 st.title('WasteDrop')
 
