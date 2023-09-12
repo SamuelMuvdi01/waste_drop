@@ -15,7 +15,7 @@ conn = pymysql.connect(
     password=st.secrets.mysql.password,
     port=st.secrets.mysql.port,
     database=st.secrets.mysql.database,
-    ssl_disabled=st.secrets.mysql.ssl_disabed
+    ssl_disabled=st.secrets.mysql.ssl_disabled
     )
 
 curr = conn.cursor()
@@ -31,3 +31,18 @@ for i in output:
 #result = cursor.fetchall()
 #print(result)
 
+
+
+"""
+conn = mysql.connector.connect(**st.secrets["mysql"])
+
+@st.cache_data(ttl=600)
+def run_query(query):
+    with conn.cursor() as cur:
+        cur.execute(query)
+        return cur.fetchall()
+    
+rows = run_query("SELECT * FROM wastedrop_db.users")
+
+print(rows)
+"""
