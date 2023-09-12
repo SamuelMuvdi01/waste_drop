@@ -1,12 +1,12 @@
 import streamlit as st
-from pages import login
-from multiapp import MultiApp
+from streamlit.source_util import _on_pages_changed, get_pages
+from streamlit_extras.switch_page_button import switch_page
 from pages import sign_up
-app = MultiApp
+
 
 st.set_page_config(page_title="login")
 
 st.title("Please login!")
 
-
-app.add_app("Sign Up", sign_up.app)
+if st.button("Sign Up"):
+    switch_page("sign_up")
