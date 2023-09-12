@@ -1,29 +1,24 @@
 import streamlit as st
-import pandas
+import pandas as pd
 import requests
 from urllib.error import URLError
-import pymysql
+
 
 
 st.title('WasteDrop')
 
 st.write("Home Page")
 
-conn = pymysql.connect(
-    host=st.secrets.mysql.host,
-    user=st.secrets.mysql.user,
-    password=st.secrets.mysql.password,
-    port=st.secrets.mysql.port,
-    database=st.secrets.mysql.database,
-    ssl_disabled=st.secrets.mysql.ssl_disabled
-    )
 
-curr = conn.cursor()
-curr.execute('SELECT * FROM wastedrop_db.users')
-output = curr.fetchall()
+conn = st.experimental_connection('mysql', type='sql')
 
-for i in output:
-    print(i)
+df = conn.query('SELECT * from wastedrop_db.users')
+
+for row in df.itertuples():
+    st.write(f"{row.last_name}")
+
+
+
 
 #cnx = mysql.connector.connect(user="wastedrop_admin", password="Team_7_pass$", host="waste-drop-server.mysql.database.azure.com", port=3306, database="wastedrop_db", ssl_ca="DigiCertGlobalRootCA.crt.pem", ssl_disabled=False)
 #cursor = cnx.cursor()
