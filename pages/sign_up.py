@@ -14,13 +14,13 @@ def clear_inputs():
     st.session_state['password'] = ""
 
 if "first_name" not in st.session_state:
-    st.session_state['first_name']
+    st.session_state['first_name'] = ""
 if "last_name" not in st.session_state:
-    st.session_state['last_name']
+    st.session_state['last_name'] = ""
 if "email" not in st.session_state:
-    st.session_state['email']
+    st.session_state['email'] = ""
 if "password" not in st.session_state:
-    st.session_state['password']
+    st.session_state['password'] = ""
 
 
 
