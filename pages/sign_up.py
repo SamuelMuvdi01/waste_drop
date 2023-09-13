@@ -13,6 +13,15 @@ def clear_inputs():
     st.session_state['email'] = ""
     st.session_state['password'] = ""
 
+if "first_name" not in st.session_state:
+    st.session_state['first_name']
+if "last_name" not in st.session_state:
+    st.session_state['last_name']
+if "email" not in st.session_state:
+    st.session_state['email']
+if "password" not in st.session_state:
+    st.session_state['password']
+
 
 
 
@@ -23,14 +32,7 @@ password = st.text_input("Please enter a password", key="password", placeholder=
 create_user_button = st.button("Create account", key="create_user_button")
 
 
-if first_name not in st.session_state:
-    st.session_state['first_name']
-if last_name not in st.session_state:
-    st.session_state['last_name']
-if email not in st.session_state:
-    st.session_state['email']
-if password not in st.session_state:
-    st.session_state['password']
+
 
 
 
