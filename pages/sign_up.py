@@ -45,8 +45,9 @@ pass_email = bool(re.match(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\
 pass_valid= bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$", password_val ))
 
 
-num =2
-cursor.execute("INSERT INTO public.test_tab(id) VALUES({})".format(num))
+num =3
+word = "this is a test word"
+cursor.execute("INSERT INTO public.test_tab(id, test_rec) VALUES({})".format(num, word))
 
 if(pass_valid == True and len(last_name_val) > 2 and len(last_name_val) > 2 and pass_email == True):
    # hashed_password = stauth.Hasher(password_val).generate()
