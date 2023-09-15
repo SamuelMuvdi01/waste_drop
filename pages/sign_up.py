@@ -35,11 +35,6 @@ if "email" not in st.session_state:
 if "password" not in st.session_state:
     st.session_state['password'] = ""
 
-
-hashed_passwords = stauth.Hasher(['abc', 'def']).generate()
-
-st.write(hashed_passwords)
-
 first_name_val = st.text_input("Please enter first name", placeholder="John", key="first_name")
 last_name_val = st.text_input("Please enter last name", placeholder="Doe", key="last_name")
 email_val = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com", key="email")
@@ -52,7 +47,7 @@ pass_email = bool(re.match(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\
 pass_valid= bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$", password_val ))
 
 if(pass_valid == True and len(last_name_val) > 2 and len(last_name_val) > 2 and pass_email == True and create_user_button):
-    hashed_password = stauth.Hasher(password_val).generate()
-    for (hashed_passwords) in (hashed_password):
-        run_query("INSERT INTO public.users(email, first_name, last_name, password) VALUES({}, {}, {}, {})".format(email_val, first_name_val, last_name_val, hashed_passwords))
+    #hashed_password = stauth.Hasher(password_val).generate()
+   #for (hashed_passwords) in (hashed_password):
+        run_query("INSERT INTO public.users(email, first_name, last_name, password) VALUES({}, {}, {}, {})".format(email_val, first_name_val, last_name_val, password_val))
 
