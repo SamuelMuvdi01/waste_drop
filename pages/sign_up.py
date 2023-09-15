@@ -4,7 +4,7 @@ from streamlit_extras.switch_page_button import switch_page
 import streamlit_authenticator as stauth
 import re
 
-st.set_page_config(page_title="sign_up")
+st.set_page_config(page_title="Sign_Up")
 st.title("welcome, please sign up below")
 
 def clear_inputs():
@@ -28,7 +28,7 @@ if "password" not in st.session_state:
 first_name = st.text_input("Please enter first name", placeholder="John", key="first_name")
 last_name = st.text_input("Please enter last name", placeholder="Doe", key="last_name")
 email = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com", key="email")
-password = st.text_input("Please enter a password", key="password", placeholder="xxxxxxxx", help="Password must be at least 8 characters long, have an upper case letter, and have a symbol")
+password = st.text_input("Please enter a password", key="password", placeholder="********", help="Password must be at least 8 characters long, have an upper case letter, and have a symbol")
 create_user_button = st.button("Create account", key="create_user_button")
 
 
