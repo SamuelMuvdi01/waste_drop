@@ -1,5 +1,6 @@
 import streamlit as st
 from streamlit.source_util import _on_pages_changed, get_pages
+import streamlit_authenticator as stauth
 from streamlit_extras.switch_page_button import switch_page
 import psycopg2
 
@@ -19,7 +20,9 @@ def run_query(query):
         return cur.fetchall()
     
 def verify_login(email, password):
-    query = f"SELECT * FROM public.users WHERE email = '{email}' AND password = '{password}'"
+    hashed_password = stauth.Hasher(password).generate()
+    hashed_password = str(hashed_password[1])
+    query = f"SELECT * FROM public.users WHERE email = '{email}' AND password = '{hashed_password}'"
     result = run_query(query)
     return len(result) > 0
 
