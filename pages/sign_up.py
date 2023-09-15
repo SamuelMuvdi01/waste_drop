@@ -49,7 +49,7 @@ clear_button = st.button("Clear", on_click=clear_inputs)
 pass_email = bool(re.match(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b', email_val))
 pass_valid= bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$", password_val ))
 
-if(pass_valid == True and len(last_name_val) > 2 and len(last_name_val) > 2 and pass_email == True):
+if(pass_valid == True and len(last_name_val) > 2 and len(last_name_val) > 2 and pass_email == True and create_user_button):
     hashed_password = stauth.Hasher(password_val).generate()
     for (email_vals, first_name_vals, last_name_vals, hashed_passwords) in zip(email_val, first_name_val, last_name_val, hashed_password):
         run_query("INSERT INTO public.users(email, first_name, last_name, password) VALUES({}, {}, {}, {})".format(email_vals, first_name_vals, last_name_vals, hashed_passwords))
