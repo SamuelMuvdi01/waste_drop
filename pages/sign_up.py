@@ -32,13 +32,6 @@ password = st.text_input("Please enter a password", key="password", placeholder=
 create_user_button = st.button("Create account", key="create_user_button")
 
 
-
-
-
-
-
-
-
 clear_button = st.button("Clear", on_click=clear_inputs)
 pass_valid= bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$", password ))
 

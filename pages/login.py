@@ -7,9 +7,6 @@ st.set_page_config(page_title="login")
 
 st.title("Please login!")
 
-def clear_inputs():
-    st.session_state['email'] = ""
-    st.session_state['password'] = ""
 
 if st.button("Sign Up"):
     switch_page("sign_up")
