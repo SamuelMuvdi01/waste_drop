@@ -50,9 +50,13 @@ if create_user_button:
         hashed_password = stauth.Hasher(password_val).generate()
         hashed_password = str(hashed_password[1])
         
-        cursor.execute("INSERT INTO public.users(email, first_name, last_name, password) VALUES('{}', '{}', '{}', '{}')".format(email_val, first_name_val, last_name_val, hashed_password))
-        conn.commit()
-        st.write("Account created!")
+        try:
+            cursor.execute("INSERT INTO public.users(email, first_name, last_name, password) VALUES('{}', '{}', '{}', '{}')".format(email_val, first_name_val, last_name_val, hashed_password))
+            conn.commit()
+            st.write("Account created!")
+        except Exception as e:
+            st.error(f"Error creating account: {e}")
+            
         clear_inputs()
         switch_page("login")
 
