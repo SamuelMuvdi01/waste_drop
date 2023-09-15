@@ -51,5 +51,7 @@ pass_valid= bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}
 
 if(pass_valid == True and len(last_name_val) > 2 and len(last_name_val) > 2 and pass_email == True and create_user_button):
     hashed_password = stauth.Hasher(password_val).generate()
+    st.write(type(hashed_password))
     for (email_vals, first_name_vals, last_name_vals, hashed_passwords) in zip(email_val, first_name_val, last_name_val, hashed_password):
         run_query("INSERT INTO public.users(email, first_name, last_name, password) VALUES({}, {}, {}, {})".format(email_vals, first_name_vals, last_name_vals, hashed_passwords))
+
