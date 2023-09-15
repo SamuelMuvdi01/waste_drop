@@ -52,3 +52,4 @@ if(pass_valid == True and len(last_name_val) > 2 and len(last_name_val) > 2 and 
    #for (hashed_passwords) in (hashed_password):
         run_query("INSERT INTO public.users(email, first_name, last_name, password) VALUES({}, {}, {}, {})".format(email_val, first_name_val, last_name_val, password_val))
 conn.comit()
+st.write("Account created!")
