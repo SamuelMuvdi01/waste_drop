@@ -16,10 +16,7 @@ def init_connection():
 conn = init_connection()
 conn.autocommit = True
 
-def run_query(query):
-    with conn.cursor() as cur:
-        cur.execute(query)
-        return cur.fetchall()
+cursor = conn.cursor()
 
 def clear_inputs():
     st.session_state['first_name'] = ""
@@ -49,6 +46,6 @@ pass_valid= bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}
 
 if(pass_valid == True and len(last_name_val) > 2 and len(last_name_val) > 2 and pass_email == True and create_user_button):
     hashed_password = stauth.Hasher(password_val).generate()
-    run_query("INSERT INTO public.users(email, first_name, last_name, password) VALUES({}, {}, {}, {});".format(email_val, first_name_val, last_name_val, password_val))
+    cursor.execute("INSERT INTO public.users(email, first_name, last_name, password) VALUES({}, {}, {}, {});".format(email_val, first_name_val, last_name_val, password_val))
     conn.commit()
 st.write("Account created!")
