@@ -36,7 +36,9 @@ if "password" not in st.session_state:
     st.session_state['password'] = ""
 
 
+hashed_passwords = stauth.Hasher(['abc', 'def']).generate()
 
+st.write(hashed_passwords)
 
 first_name_val = st.text_input("Please enter first name", placeholder="John", key="first_name")
 last_name_val = st.text_input("Please enter last name", placeholder="Doe", key="last_name")
@@ -51,7 +53,6 @@ pass_valid= bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}
 
 if(pass_valid == True and len(last_name_val) > 2 and len(last_name_val) > 2 and pass_email == True and create_user_button):
     hashed_password = stauth.Hasher(password_val).generate()
-    st.write(type(hashed_password))
     for (hashed_passwords) in (hashed_password):
         run_query("INSERT INTO public.users(email, first_name, last_name, password) VALUES({}, {}, {}, {})".format(email_val, first_name_val, last_name_val, hashed_passwords))
 
