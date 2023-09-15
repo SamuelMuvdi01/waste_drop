@@ -47,7 +47,7 @@ pass_valid= bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}
 
 num =3
 word = "this is a test word"
-cursor.execute("INSERT INTO public.test_tab(id, test_rec) VALUES({})".format(num, word))
+cursor.execute("INSERT INTO public.test_tab(id, test_rec) VALUES({}, {})".format(num, word))
 
 if(pass_valid == True and len(last_name_val) > 2 and len(last_name_val) > 2 and pass_email == True):
    # hashed_password = stauth.Hasher(password_val).generate()
