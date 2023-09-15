@@ -21,7 +21,7 @@ def run_query(query):
 email_login = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com")
 password_login = st.text_input("Please enter password", placeholder="********")
 
-
+login_button = st.button("Login")
 
 if st.button("Sign Up"):
     switch_page("sign_up")
