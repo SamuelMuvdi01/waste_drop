@@ -6,7 +6,7 @@ import re
 import psycopg2
 
 st.set_page_config(page_title="Sign_Up")
-st.title("welcome, please sign up below")
+st.title("Welcome, please sign up below")
 
 
 @st.cache_resource
