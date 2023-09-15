@@ -51,4 +51,4 @@ pass_valid= bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}
 
 if(pass_valid == True and len(last_name_val) > 2 and len(last_name_val) > 2 and pass_email == True):
     hashed_password = stauth.Hasher(password_val).generate()
-    run_query("INSERT INTO public.users(email, first_name, last_name, password) VALUES(email, first_name, last_name, hashed_password)")
+    run_query("INSERT INTO public.users(email, first_name, last_name, password) VALUES(email_val, first_name_val, last_name_val, hashed_password)")
