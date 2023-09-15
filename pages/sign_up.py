@@ -52,7 +52,4 @@ if(pass_valid == True and len(last_name_val) > 2 and len(last_name_val) > 2 and 
             cursor.execute("INSERT INTO public.users(email, first_name, last_name, password) VALUES('{}', '{}', '{}', '{}')".format(email_val, first_name_val, last_name_val, hashed_password))
             conn.commit()
             st.write("Account created!")
-            st.session_state['first_name'] = ""
-            st.session_state['last_name'] = ""
-            st.session_state['email'] = ""
-            st.session_state['password'] = ""
+
