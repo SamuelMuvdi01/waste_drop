@@ -26,9 +26,9 @@ col1, col2, col3 = st.columns([1,1,1])
 with col1:
     login_button = st.button("Login")
 
-with col2:
+with col1:
     st.write("or")
 
-with col3:
+with col1:
     if st.button("Sign Up"):
         switch_page("sign_up")
