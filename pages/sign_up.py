@@ -46,7 +46,7 @@ create_user_button = st.button("Create account", key="create_user_button")
 
 
 clear_button = st.button("Clear", on_click=clear_inputs)
-pass_email = bool(re.match(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'))
+pass_email = bool(re.match(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'), email)
 pass_valid= bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$", password ))
 
 if(pass_valid == True and len(last_name) > 2 and len(last_name) > 2 and pass_email == True):
