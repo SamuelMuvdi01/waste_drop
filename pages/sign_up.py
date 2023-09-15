@@ -3,9 +3,22 @@ from streamlit.source_util import _on_pages_changed, get_pages
 from streamlit_extras.switch_page_button import switch_page
 import streamlit_authenticator as stauth
 import re
+import psycopg2
 
 st.set_page_config(page_title="Sign_Up")
 st.title("welcome, please sign up below")
+
+
+@st.cache_resource
+def init_connection():
+    return psycopg2.connect(**st.secrets["postgres"])
+
+conn = init_connection()
+
+def run_query(query):
+    with conn.cursor() as cur:
+        cur.execute(query)
+        return cur.fetchall()
 
 def clear_inputs():
     st.session_state['first_name'] = ""
@@ -33,8 +46,9 @@ create_user_button = st.button("Create account", key="create_user_button")
 
 
 clear_button = st.button("Clear", on_click=clear_inputs)
+pass_email = bool(re.match(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'))
 pass_valid= bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$", password ))
 
-
-
-
+if(pass_valid == True and len(last_name) > 2 and len(last_name) > 2 and pass_email == True):
+    hashed_password = stauth.Hasher(password).generate()
+    run_query("INSERT INTO public.users(email, first_name, last_name, password) VALUES(email, first_name, last_name, hashed_password)")
