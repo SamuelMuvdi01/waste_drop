@@ -21,14 +21,9 @@ def run_query(query):
 email_login = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com")
 password_login = st.text_input("Please enter password", placeholder="********")
 
-col1, col2, col3 = st.columns([1,1,1])
+login_button = st.button("Login")
 
-with col1:
-    login_button = st.button("Login")
+st.write("or")
 
-with col1:
-    st.write("or")
-
-with col1:
-    if st.button("Sign Up"):
-        switch_page("sign_up")
+if st.button("Sign Up"):
+    switch_page("sign_up")
