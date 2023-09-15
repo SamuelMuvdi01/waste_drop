@@ -37,7 +37,6 @@ first_name_val = st.text_input("Please enter first name", placeholder="John", ke
 last_name_val = st.text_input("Please enter last name", placeholder="Doe", key="last_name")
 email_val = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com", key="email")
 password_val = st.text_input("Please enter a password", key="password", placeholder="********", help="Password must be at least 8 characters long, have an upper case letter, and have a symbol")
-create_user_button = st.button("Create account", key="create_user_button")
 
 
 clear_button = st.button("Clear", on_click=clear_inputs)
@@ -48,9 +47,9 @@ pass_valid= bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}
 if(pass_valid == True and len(last_name_val) > 2 and len(last_name_val) > 2 and pass_email == True):
     hashed_password = stauth.Hasher(password_val).generate()
     hashed_password = str(hashed_password[1])
-    if(create_user_button):
+    if st.button("Create account"):
             cursor.execute("INSERT INTO public.users(email, first_name, last_name, password) VALUES('{}', '{}', '{}', '{}')".format(email_val, first_name_val, last_name_val, hashed_password))
             conn.commit()
             st.write("Account created!")
-            
+            clear_inputs()
 
