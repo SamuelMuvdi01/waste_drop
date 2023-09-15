@@ -53,4 +53,5 @@ if(pass_valid == True and len(last_name_val) > 2 and len(last_name_val) > 2 and 
             conn.commit()
             st.write("Account created!")
             clear_inputs()
+            switch_page("login")
 
