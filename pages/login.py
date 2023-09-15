@@ -18,12 +18,24 @@ def run_query(query):
         cur.execute(query)
         return cur.fetchall()
     
+def verify_login(email, password):
+    query = f"SELECT * FROM public.users WHERE email = '{email}' AND password = '{password}'"
+    result = run_query(query)
+    return len(result) > 0
+
 email_login = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com")
-password_login = st.text_input("Please enter password", placeholder="********")
+password_login = st.text_input("Please enter password", type="password", placeholder="********")
 
 login_button = st.button("Login")
 
-st.write("or")
+if login_button:
+    hashed_password = stauth.Hasher(password_login).generate()
+    hashed_password = str(hashed_password[1])
+    if verify_login(email_login, hashed_password):
+        st.write("Login successful!")
+        switch_page("home")
+    else:
+        st.write("Invalid email or password.")
 
 if st.button("Sign Up"):
     switch_page("sign_up")
