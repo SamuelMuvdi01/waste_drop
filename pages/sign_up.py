@@ -38,17 +38,17 @@ if "password" not in st.session_state:
 
 
 
-first_name = st.text_input("Please enter first name", placeholder="John", key="first_name")
-last_name = st.text_input("Please enter last name", placeholder="Doe", key="last_name")
-email = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com", key="email")
-password = st.text_input("Please enter a password", key="password", placeholder="********", help="Password must be at least 8 characters long, have an upper case letter, and have a symbol")
+first_name_val = st.text_input("Please enter first name", placeholder="John", key="first_name")
+last_name_val = st.text_input("Please enter last name", placeholder="Doe", key="last_name")
+email_val = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com", key="email")
+password_val = st.text_input("Please enter a password", key="password", placeholder="********", help="Password must be at least 8 characters long, have an upper case letter, and have a symbol")
 create_user_button = st.button("Create account", key="create_user_button")
 
 
 clear_button = st.button("Clear", on_click=clear_inputs)
-pass_email = bool(re.match(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b', email))
-pass_valid= bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$", password ))
+pass_email = bool(re.match(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b', email_val))
+pass_valid= bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$", password_val ))
 
-if(pass_valid == True and len(last_name) > 2 and len(last_name) > 2 and pass_email == True):
-    hashed_password = stauth.Hasher(password).generate()
+if(pass_valid == True and len(last_name_val) > 2 and len(last_name_val) > 2 and pass_email == True):
+    hashed_password = stauth.Hasher(password_val).generate()
     run_query("INSERT INTO public.users(email, first_name, last_name, password) VALUES(email, first_name, last_name, hashed_password)")
