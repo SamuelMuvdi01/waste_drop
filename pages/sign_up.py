@@ -56,8 +56,6 @@ if create_user_button:
             st.write("Account created!")
         except Exception as e:
             st.error(f"Error creating account: {e}")
-            
-        switch_page("login")
 
     else:
         st.write("One of the fields above are invalid.")
