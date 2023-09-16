@@ -12,34 +12,32 @@ def init_connection():
     return psycopg2.connect(**st.secrets["postgres"])
 
 conn = init_connection()
-conn.autocommit = True
-cursor = conn.cursor()
 
-def authenticate_user(email, password):
-    cursor.execute("SELECT * FROM public.users WHERE email=%s", (email,))
-    user = cursor.fetchone()
-    if user:
-        hashed_password = user[3]
-        # Add a '[' character to the front of the stored hashed password
-        hashed_password = '[' + hashed_password
-        if stauth.Hasher.verify(password, hashed_password):
-            return True
-    return False
+def run_query(query):
+    with conn.cursor() as cur:
+        cur.execute(query)
+        return cur.fetchall()
+    
+def verify_login(email, password):
+    hashed_password = stauth.Hasher(password).generate()
+    hashed_password = str(hashed_password[1])
+    query = f"SELECT * FROM public.users WHERE email = '{email}' AND password = '{hashed_password}'"
+    result = run_query(query)
+    return len(result) > 0
 
-email_val = st.text_input("Email", key="email")
-password_val = st.text_input("Password", key="password", type="password")
+email_login = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com")
+password_login = st.text_input("Please enter password", type="password", placeholder="********")
 
-login_button = st.button("Login", key="login_button")
+login_button = st.button("Login")
 
 if login_button:
-    if email_val and password_val:
-        if authenticate_user(email_val, password_val):
-            st.write("Login successful!")
-            # Add code here to redirect to a dashboard or another page
-        else:
-            st.error("Invalid email or password")
+    hashed_password = stauth.Hasher(password_login).generate()
+    hashed_password = str(hashed_password[1])
+    if verify_login(email_login, hashed_password):
+        st.write("Login successful!")
+        switch_page("home")
     else:
-        st.error("Please enter both email and password")
+        st.write("Invalid email or password.")
 
 if st.button("Sign Up"):
     switch_page("sign_up")
