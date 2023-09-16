@@ -57,7 +57,6 @@ if create_user_button:
         except Exception as e:
             st.error(f"Error creating account: {e}")
             
-        clear_inputs()
         switch_page("login")
 
     else:
