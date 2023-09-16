@@ -4,6 +4,7 @@ from streamlit_extras.switch_page_button import switch_page
 import streamlit_authenticator as stauth
 import re
 import psycopg2
+import helperfuncs as hf
 
 st.set_page_config(page_title="Sign_Up")
 st.title("Welcome, please sign up below")
@@ -51,7 +52,7 @@ if create_user_button:
         hashed_password = str(hashed_password[1])
 
         try:
-            cursor.execute("INSERT INTO public.users(email, first_name, last_name, password) VALUES('{}', '{}', '{}', '{}')".format(email_val, first_name_val, last_name_val, hashed_password))
+            cursor.execute("INSERT INTO public.users(email, first_name, last_name, password) VALUES('{}', '{}', '{}', '{}')".format(email_val, hf.capitalize(first_name_val), hf.capitalize(last_name_val), hashed_password))
             conn.commit()
             st.write("Account created!")
         except Exception as e:
