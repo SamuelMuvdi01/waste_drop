@@ -42,12 +42,16 @@ create_user_button = st.button("Create account", key="create_user_button")
 
 clear_button = st.button("Clear", on_click=clear_inputs)
 pass_email = bool(re.match(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b', email_val))
-pass_valid= bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$", password_val ))
+pass_valid = bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$", password_val ))
 
 
 if create_user_button:
     st.write("pressed")
-    if pass_valid and len(last_name_val) > 2 and len(last_name_val) > 2 and pass_email:
+    if pass_valid == False:
+        st.write("Password Invalid")
+    elif pass_email == False:
+        st.write("Email Invalid")
+    elif pass_valid and len(last_name_val) > 2 and len(last_name_val) > 2 and pass_email:
         hashed_password = stauth.Hasher(password_val).generate()
         hashed_password = str(hashed_password[1])
         st.write("valid")
