@@ -33,13 +33,10 @@ if login_button:
     query_df = pd.DataFrame(login_results_query,columns=columns_db)
     st.write("hashed password: ", hashed_password)
     st.write("password from db: ", query_df["password"])
-
-
-    #if(cursor.fetchone() != None):
-      #  st.write("Login successful!")
-      #  switch_page("home")
-  # else:
-   #     st.write("Invalid email or password.")
+    if(hashed_password == query_df["password"].values):
+        switch_page("home")
+    else:
+        st.write("Invalid email or password.")
 
 if st.button("Sign Up"):
     switch_page("sign_up")
