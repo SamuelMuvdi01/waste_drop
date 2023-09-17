@@ -3,6 +3,7 @@ from streamlit.source_util import _on_pages_changed, get_pages
 import streamlit_authenticator as stauth
 from streamlit_extras.switch_page_button import switch_page
 import psycopg2
+import hashlib
 
 st.set_page_config(page_title="Login")
 st.title("Welcome, please log in below")
@@ -24,7 +25,7 @@ password_login = password_login.encode('utf-8')
 login_button = st.button("Login")
 
 if login_button:
-    hashed_password = bcrypt.hashpw(password_login, bcrypt.gensalt(12))
+    hashed_password ="SHA-512:" + hashlib.sha512(password_login.encode('utf-8')).hexdigest()
     st.write(hashed_password)
     cursor.execute("SELECT * FROM public.users WHERE email ilike '{}' AND password = '{}'".format(email_login, hashed_password))
     for que in cursor.fetchall():
