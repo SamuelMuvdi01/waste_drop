@@ -20,7 +20,6 @@ cursor = conn.cursor()
 
 email_login = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com")
 password_login = st.text_input("Please enter password", type="password", placeholder="********")
-password_login = password_login.encode('utf-8')
 
 login_button = st.button("Login")
 
