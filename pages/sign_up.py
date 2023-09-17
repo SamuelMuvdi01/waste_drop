@@ -54,14 +54,14 @@ if create_user_button:
         try:
             cursor.execute("INSERT INTO public.users(email, first_name, last_name, password) VALUES('{}', '{}', '{}', '{}')".format(email_val, hf.capitalize(first_name_val), hf.capitalize(last_name_val), hashed_password))
             conn.commit()
-            st.write("Account created!")
+            st.write(":green[Account created!]")
         except Exception as e:
-            st.error(f"Error creating account: {e}")
+            st.error(f":red[Error creating account: {e}]")
 
     if(pass_valid==False):
-        st.write("Oops! The password isnt strong enough, please check the question mark for criteria!")
+        st.write(":red[Oops! The password isnt strong enough, please check the question mark for criteria!]")
     if(email_valid == False):
-        st.write("Oops! The email is not complete!")
+        st.markdown(":red[Oops! The email is not complete!]")
     else:
-        st.write("One of the fields above are invalid.")
+        st.write(":red[One of the fields above are invalid!]")
 
