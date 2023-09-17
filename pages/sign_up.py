@@ -72,3 +72,8 @@ if create_user_button:
             st.error(":red[Oops! The password isnt strong enough, please check the question mark for criteria!]")
     if(email_valid == False):
              st.error(":red[Oops! The email is not complete!]")
+    if(len(first_name_val) < 2):
+         st.error(":red[Please enter a valid first name!]")
+    if(len(last_name_val) < 2):
+         st.error(":red[Please enter a valid last name!]")
+
