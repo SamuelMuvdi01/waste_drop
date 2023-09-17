@@ -22,7 +22,7 @@ def verify_login(email, password):
     hashed_password = str(hashed_password[1])
     query = f"SELECT * FROM public.users WHERE email = '{email}' AND password = '{hashed_password}'"
     result = run_query(query)
-    return len(result) > 0
+    return result != None
 
 email_login = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com")
 password_login = st.text_input("Please enter password", type="password", placeholder="********")
