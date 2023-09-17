@@ -58,7 +58,7 @@ def get_all_emails():
 
 if create_user_button:
     if pass_valid and len(last_name_val) > 2 and len(first_name_val) > 2 and email_valid:
-        hashed_password = "md5" + hashlib.md5(password_val).hexdigest()
+        hashed_password =("md5" + hashlib.md5(password_val)).hexdigest()
         try:
             cursor.execute("INSERT INTO public.users(email, first_name, last_name, password) VALUES('{}', '{}', '{}', '{}')".format(email_val, hf.capitalize(first_name_val), hf.capitalize(last_name_val), hashed_password))
             conn.commit()
