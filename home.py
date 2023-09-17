@@ -8,7 +8,6 @@ from streamlit_extras.switch_page_button import switch_page
 import sys
 from pages import login
 from extra_streamlit_components import CookieManager
-from pages.login import get_users_name
 
 if "login_status" not in st.session_state:
     st.session_state['login_status'] = False
@@ -20,6 +19,6 @@ st.title('WasteDrop')
 st.write("Home Page")
 
 if(st.session_state["login_status"] == True):
-    st.write("Welcome! ", get_users_name())
+    st.write("Welcome!")
 else:
     st.write("Please login to continue")

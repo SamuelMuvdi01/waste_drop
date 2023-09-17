@@ -22,14 +22,6 @@ def logged_in():
     st.session_state["login_status"] = True
     
 
-
-users_first_name = ''
-@st.cache_data
-def get_users_name():
-    users_first_name = query_df["first_name"].values
-    return users_first_name
-    
-
 conn = init_connection()
 
 cursor = conn.cursor()
