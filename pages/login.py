@@ -20,6 +20,7 @@ cursor = conn.cursor()
 
 email_login = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com")
 password_login = st.text_input("Please enter password", type="password", placeholder="********")
+password_login = password_login.encode('utf-8')
 
 login_button = st.button("Login")
 
@@ -27,7 +28,6 @@ if login_button:
     hashed_password = bcrypt.hashpw(password_login, bcrypt.gensalt(12))
     st.write(hashed_password)
     cursor.execute("SELECT * FROM public.users WHERE email ilike '{}' AND password = '{}'".format(email_login, hashed_password))
-    query_results = ''
     for que in cursor.fetchall():
         query_results = que
     st.write(query_results)

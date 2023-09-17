@@ -43,6 +43,7 @@ last_name_val = st.text_input("Please enter last name", placeholder="Doe", key="
 email_val = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com", key="email")
 password_val = st.text_input("Please enter a password", key="password", placeholder="********", help="Password must be at least 8 characters long, have an upper case letter, and have a symbol")
 create_user_button = st.button("Create account", key="create_user_button")
+password_val = password_val.encode('utf-8')
 
 
 clear_button = st.button("Clear", on_click=clear_inputs)
