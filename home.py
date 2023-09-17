@@ -9,6 +9,9 @@ import sys
 from pages import login
 from extra_streamlit_components import CookieManager
 
+if "login_status" not in st.session_state:
+    st.session_state['login_status'] = False
+
 st.sidebar.success("Sign up or login!")
 
 st.title('WasteDrop')
