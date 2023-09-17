@@ -42,12 +42,12 @@ create_user_button = st.button("Create account", key="create_user_button")
 
 
 clear_button = st.button("Clear", on_click=clear_inputs)
-pass_email = bool(re.match(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b', email_val))
+email_valid = bool(re.match(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b', email_val))
 pass_valid = bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$", password_val))
 
 
 if create_user_button:
-    if pass_valid and len(last_name_val) > 2 and len(first_name_val) > 2 and pass_email:
+    if pass_valid and len(last_name_val) > 2 and len(first_name_val) > 2 and email_valid:
         hashed_password = stauth.Hasher(password_val).generate()
         hashed_password = str(hashed_password[1])
 
@@ -58,6 +58,10 @@ if create_user_button:
         except Exception as e:
             st.error(f"Error creating account: {e}")
 
+    if(pass_valid==False):
+        st.write("Oops! The password isnt strong enough, please check the question mark for criteria!")
+    if(email_valid == False):
+        st.write("Oops! The email is not complete!")
     else:
         st.write("One of the fields above are invalid.")
 
