@@ -34,6 +34,9 @@ if "email" not in st.session_state:
 if "password" not in st.session_state:
     st.session_state['password'] = ""
 
+
+
+
 first_name_val = st.text_input("Please enter first name", placeholder="John", key="first_name")
 last_name_val = st.text_input("Please enter last name", placeholder="Doe", key="last_name")
 email_val = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com", key="email")
@@ -46,6 +49,11 @@ email_valid = bool(re.match(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}
 pass_valid = bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$", password_val))
 
 
+def get_all_emails():
+    cursor.execute("SELECT email FROM public.users WHERE email ilike '{}')".format(email_val))
+    cursor.fetchone()
+
+
 if create_user_button:
     if pass_valid and len(last_name_val) > 2 and len(first_name_val) > 2 and email_valid:
         hashed_password = stauth.Hasher(password_val).generate()
@@ -55,8 +63,10 @@ if create_user_button:
             cursor.execute("INSERT INTO public.users(email, first_name, last_name, password) VALUES('{}', '{}', '{}', '{}')".format(email_val, hf.capitalize(first_name_val), hf.capitalize(last_name_val), hashed_password))
             conn.commit()
             st.write(":green[Account created!]")
-        except Exception as e:
-            st.error(f":red[Error creating account: {e}]")
+        except:
+            if(email_val in get_all_emails()):
+                st.error(":red[This email already is in use!]")
+
 
     if(pass_valid==False):
         st.write(":red[Oops! The password isnt strong enough, please check the question mark for criteria!]")

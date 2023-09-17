@@ -16,7 +16,6 @@ conn = init_connection()
 def run_query(query):
     with conn.cursor() as cur:
         cur.execute(query)
-        return cur.fetchall()
     
 def verify_login(email, password):
     hashed_password = stauth.Hasher(password).generate()
