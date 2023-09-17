@@ -50,7 +50,7 @@ pass_valid = bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!]).{8
 
 
 def get_all_emails():
-    cursor.execute("SELECT email FROM public.users WHERE email ilike '{}')".format(email_val))
+    cursor.execute("SELECT email FROM public.users WHERE email ilike '{}';").format(email_val)
     cursor.fetchone()
 
 
