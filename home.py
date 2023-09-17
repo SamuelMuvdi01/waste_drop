@@ -19,6 +19,6 @@ st.title('WasteDrop')
 st.write("Home Page")
 
 if(st.session_state["login_status"] == True):
-    st.write("Welcome! ", login.user_first_name)
+    st.write("Welcome! ", login.users_name)
 else:
     st.write("Please login to continue")
