@@ -26,6 +26,7 @@ if login_button:
     hashed_password = stauth.Hasher(password_login).generate()
     hashed_password = str(hashed_password[1])
     cursor.execute("SELECT * FROM public.users WHERE email ilike '{}' AND password = '{}'".format(email_login, hashed_password))
+    st.write(hashed_password)
     if(cursor.fetchone() != None):
         st.write("Login successful!")
         switch_page("home")
