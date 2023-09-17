@@ -13,16 +13,9 @@ def init_connection():
 
 conn = init_connection()
 
-def run_query(query):
-    with conn.cursor() as cur:
-        cur.execute(query)
+cursor = conn.cursor()
     
-def verify_login(email, password):
-    hashed_password = stauth.Hasher(password).generate()
-    hashed_password = str(hashed_password[1])
-    query = f"SELECT * FROM public.users WHERE email = '{email}' AND password = '{hashed_password}'"
-    result = run_query(query)
-    return result != None
+
 
 email_login = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com")
 password_login = st.text_input("Please enter password", type="password", placeholder="********")
@@ -32,11 +25,11 @@ login_button = st.button("Login")
 if login_button:
     hashed_password = stauth.Hasher(password_login).generate()
     hashed_password = str(hashed_password[1])
-    if verify_login(email_login, hashed_password):
-        st.write("Login successful!")
-        switch_page("home")
-    else:
-        st.write("Invalid email or password.")
+    login_query = "SELECT * FROM public.users WHERE email ilike '{}' AND password = '{}'".format(email_login, hashed_password)
+    st.write("Login successful!")
+    switch_page("home")
+else:
+    st.write("Invalid email or password.")
 
 if st.button("Sign Up"):
     switch_page("sign_up")
