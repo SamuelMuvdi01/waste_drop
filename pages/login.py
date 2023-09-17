@@ -7,6 +7,7 @@ import hashlib
 import pandas as pd
 
 st.set_page_config(page_title="Login")
+login_status = False
 st.title("Welcome, please log in below")
 
 @st.cache_resource
@@ -19,7 +20,10 @@ conn = init_connection()
 
 cursor = conn.cursor()
 
+def users_name(user_first_name):
+    return user_first_name
 
+user_first_name = ''
 
 email_login = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com")
 password_login = st.text_input("Please enter password", type="password", placeholder="********")
@@ -34,7 +38,9 @@ if login_button:
     st.write("hashed password: ", hashed_password)
     st.write("password from db: ", query_df["password"])
     if(hashed_password == query_df["password"].values):
+        login_status = True
         switch_page("home")
+        users_name(query_df["first_name"].values)
     else:
         st.write("Invalid email or password.")
 
