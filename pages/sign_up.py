@@ -5,6 +5,7 @@ import streamlit_authenticator as stauth
 import re
 import psycopg2
 import helperfuncs as hf
+import bcrypt
 
 st.set_page_config(page_title="Sign_Up")
 st.title("Welcome, please sign up below")
@@ -56,8 +57,7 @@ def get_all_emails():
 
 if create_user_button:
     if pass_valid and len(last_name_val) > 2 and len(first_name_val) > 2 and email_valid:
-        hashed_password = stauth.Hasher(password_val).generate()
-        hashed_password = str(hashed_password[1])
+        hashed_password = bcrypt.hashpw(password_val, bcrypt.gensalt(12))
         try:
             cursor.execute("INSERT INTO public.users(email, first_name, last_name, password) VALUES('{}', '{}', '{}', '{}')".format(email_val, hf.capitalize(first_name_val), hf.capitalize(last_name_val), hashed_password))
             conn.commit()
