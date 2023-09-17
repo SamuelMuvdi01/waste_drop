@@ -20,7 +20,10 @@ def init_connection():
 @st.cache_resource
 def logged_in():
     st.session_state["login_status"] = True
-
+    
+@st.cache_resource
+def get_users_name():
+    query_df["first_name"].values
 
 conn = init_connection()
 
@@ -41,7 +44,7 @@ if login_button:
     if(hashed_password == query_df["password"].values):
         logged_in()
         switch_page("home")
-        users_name = query_df["first_name"].values
+        get_users_name()
     else:
         st.write("Invalid email or password.")
 
