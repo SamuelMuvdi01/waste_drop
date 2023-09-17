@@ -7,24 +7,31 @@ import hashlib
 import pandas as pd
 
 st.set_page_config(page_title="Login")
-login_status = False
+
+if "login_status" not in st.session_state:
+    st.session_state['login_status'] = False
+
 st.title("Welcome, please log in below")
 
 @st.cache_resource
 def init_connection():
     return psycopg2.connect(**st.secrets["postgres"])
 
-columns_db = ["id", "email", "first_name", "last_name", "timestamp", "password"]
+@st.cache_resource
+def logged_in():
+    st.session_state["login_status"] = True
+
+def users_name(user_first_name):
+    return user_first_name
+
 
 conn = init_connection()
 
 cursor = conn.cursor()
 
-def users_name(user_first_name):
-    return user_first_name
 
+columns_db = ["id", "email", "first_name", "last_name", "timestamp", "password"]
 user_first_name = ''
-
 email_login = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com")
 password_login = st.text_input("Please enter password", type="password", placeholder="********")
 
@@ -38,7 +45,7 @@ if login_button:
     st.write("hashed password: ", hashed_password)
     st.write("password from db: ", query_df["password"])
     if(hashed_password == query_df["password"].values):
-        login_status = True
+        logged_in()
         switch_page("home")
         users_name(query_df["first_name"].values)
     else:
