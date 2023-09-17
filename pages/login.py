@@ -38,8 +38,6 @@ if login_button:
     cursor.execute("SELECT * FROM public.users WHERE email ilike '{}' AND password = '{}'".format(email_login, hashed_password))
     login_results_query = cursor.fetchall()
     query_df = pd.DataFrame(login_results_query,columns=columns_db)
-    st.write("hashed password: ", hashed_password)
-    st.write("password from db: ", query_df["password"])
     if(hashed_password == query_df["password"].values):
         logged_in()
         switch_page("home")
