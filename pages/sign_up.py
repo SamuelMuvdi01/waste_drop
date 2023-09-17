@@ -58,10 +58,6 @@ if create_user_button:
     if pass_valid and len(last_name_val) > 2 and len(first_name_val) > 2 and email_valid:
         hashed_password = stauth.Hasher(password_val).generate()
         hashed_password = str(hashed_password[1])
-        if(pass_valid==False):
-            st.write(":red[Oops! The password isnt strong enough, please check the question mark for criteria!]")
-        if(email_valid == False):
-             st.markdown(":red[Oops! The email is not complete!]")
         try:
             cursor.execute("INSERT INTO public.users(email, first_name, last_name, password) VALUES('{}', '{}', '{}', '{}')".format(email_val, hf.capitalize(first_name_val), hf.capitalize(last_name_val), hashed_password))
             conn.commit()
@@ -71,7 +67,8 @@ if create_user_button:
                 st.error(":red[This email already is in use!]")
             else:
                 st.error(":red[One of the fields above are invalid!]")
-
-
   
-
+    if(pass_valid==False):
+            st.error(":red[Oops! The password isnt strong enough, please check the question mark for criteria!]")
+    if(email_valid == False):
+             st.error(":red[Oops! The email is not complete!]")
