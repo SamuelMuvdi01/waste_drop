@@ -6,11 +6,7 @@ from urllib.error import URLError
 from streamlit.source_util import _on_pages_changed, get_pages
 from streamlit_extras.switch_page_button import switch_page
 import sys
-<<<<<<< HEAD:home.py
-import login
-=======
 from pages import login
->>>>>>> parent of 779a629 (moved out of pages):pages/home.py
 from extra_streamlit_components import CookieManager
 
 if "login_status" not in st.session_state:
