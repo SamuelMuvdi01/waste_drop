@@ -6,7 +6,7 @@ from urllib.error import URLError
 from streamlit.source_util import _on_pages_changed, get_pages
 from streamlit_extras.switch_page_button import switch_page
 import sys
-from pages import login
+from .pages import login
 from extra_streamlit_components import CookieManager
 
 if "login_status" not in st.session_state:
