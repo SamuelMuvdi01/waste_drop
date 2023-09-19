@@ -23,7 +23,7 @@ st.title('WasteDrop')
 
 
 if(st.session_state["login_status"] == True):
-    st.write("Welcome! ",(st.session_state["saved_user_name"]).astype(str))
+    st.write("Welcome! ",st.session_state["saved_user_name"])
     logout_button = st.sidebar.button("log off", on_click=log_out)
     
 
