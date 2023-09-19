@@ -11,11 +11,18 @@ from extra_streamlit_components import CookieManager
 if "login_status" not in st.session_state:
     st.session_state['login_status'] = False
 
+
+def log_out():
+    st.session_state['login_status'] = False
+    switch_page("sign_up")
+
 st.title('WasteDrop')
 
 st.write("Home Page")
 
 if(st.session_state["login_status"] == True):
     st.write("Welcome!")
+    with st.sidebar:
+        logout_button = st.button("Log off", on_click=log_out())
 else:
     st.write("Please login to continue")
