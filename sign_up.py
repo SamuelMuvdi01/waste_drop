@@ -18,7 +18,6 @@ def init_connection():
     return psycopg2.connect(**st.secrets["postgres"])
 
 conn = init_connection()
-conn.autocommit = True
 
 cursor = conn.cursor()
 
