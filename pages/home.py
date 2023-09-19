@@ -21,7 +21,7 @@ st.write("Home Page")
 
 if(st.session_state["login_status"] == True):
     st.write("Welcome!")
-    with st.sidebar:
-        logout_button = st.button("Log off", on_click=log_out())
+    logout_button = st.sidebar.button("log off", on_click=log_out)
+
 else:
     st.write("Please login to continue")
