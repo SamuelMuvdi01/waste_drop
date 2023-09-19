@@ -1,6 +1,5 @@
 
 import streamlit as st
-st.set_page_config(page_title="Home")
 import pandas as pd
 from urllib.error import URLError
 from streamlit.source_util import _on_pages_changed, get_pages
