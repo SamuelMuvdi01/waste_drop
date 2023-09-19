@@ -22,6 +22,7 @@ def init_connection():
 @st.cache_resource
 def logged_in():
     st.session_state["login_status"] = True
+    switch_page("home")
     
 
 conn = init_connection()
@@ -44,7 +45,6 @@ if login_button:
     query_df = pd.DataFrame(login_results_query,columns=columns_db)
     if(hashed_password == query_df["password"].values):
         logged_in()
-        switch_page("home")
     else:
         st.write("Invalid email or password.")
 
