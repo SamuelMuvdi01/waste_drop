@@ -8,6 +8,8 @@ import pandas as pd
 
 st.set_page_config(page_title="Login")
 
+col1, col2, col3, col4 = st.columns(4)
+
 if "login_status" not in st.session_state:
     st.session_state['login_status'] = False
 
@@ -31,7 +33,8 @@ columns_db = ["id", "email", "first_name", "last_name", "timestamp", "password"]
 email_login = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com")
 password_login = st.text_input("Please enter password", type="password", placeholder="********")
 
-login_button = st.button("Login")
+with col1:
+    login_button = st.button("Login")
 
 if login_button:
     hashed_password ="SHA-512:" + hashlib.sha512(password_login.encode('utf-8')).hexdigest()
@@ -44,5 +47,6 @@ if login_button:
     else:
         st.write("Invalid email or password.")
 
-if st.button("Sign Up"):
-    switch_page("sign_up")
+with col2:
+    if st.button("Sign Up"):
+        switch_page("sign_up")
