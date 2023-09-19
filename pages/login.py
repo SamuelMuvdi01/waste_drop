@@ -24,7 +24,7 @@ def init_connection():
 @st.cache_resource
 def logged_in():
     st.session_state["login_status"] = True
-    switch_page("home")
+    #switch_page("home")
     
 
 conn = init_connection()
@@ -52,6 +52,7 @@ if login_button:
 
     if(hashed_password == query_df["password"].values):
         save_user_name()
+        st.write(query_df["id"].values,query_df["email"].values,query_df["first_name"].values, query_df["last_name"].values)
         logged_in()
     else:
         st.write("Invalid email or password.")
