@@ -12,6 +12,7 @@ if "login_status" not in st.session_state:
 
 
 def log_out():
+    switch_page("sign_up")
     st.session_state['login_status'] = False
     
 
@@ -24,7 +25,7 @@ st.write("Home Page")
 if(st.session_state["login_status"] == True):
     st.write("Welcome!")
     logout_button = st.sidebar.button("log off", on_click=log_out)
-    switch_page("sign_up")
+    
 
 else:
     st.write("Please login to continue")
