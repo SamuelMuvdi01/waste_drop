@@ -24,7 +24,7 @@ def init_connection():
 @st.cache_resource
 def logged_in():
     st.session_state["login_status"] = True
-    #switch_page("home")
+    switch_page("home")
     
 
 conn = init_connection()
