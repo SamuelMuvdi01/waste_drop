@@ -5,15 +5,26 @@ from urllib.error import URLError
 from streamlit.source_util import _on_pages_changed, get_pages
 from streamlit_extras.switch_page_button import switch_page
 import sys
+from st_pages import page, show_pages, hide_pages
 from extra_streamlit_components import CookieManager
 
 if "login_status" not in st.session_state:
     st.session_state['login_status'] = False
 
+show_pages([
+    page("sign_up.py","sign_up"),
+    page("login.py", "login")
+        ])
+
 
 def log_out():
     st.session_state['login_status'] = False
     switch_page("sign_up")
+    hide_pages([
+    page("sign_up.py","sign_up"),
+    page("login.py", "login")
+        ])
+    
 
 st.title('WasteDrop')
 
