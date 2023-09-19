@@ -22,7 +22,7 @@ def log_out():
     switch_page("sign_up")
     hide_pages([
     Page("sign_up.py","sign_up"),
-    Page("login.py", "login")
+    Page("pages/login.py", "login")
         ])
     
 
