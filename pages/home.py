@@ -13,7 +13,7 @@ if "login_status" not in st.session_state:
 
 show_pages([
     Page("sign_up.py","sign_up"),
-    Page("login.py", "login")
+    Page("pages/login.py", "login")
         ])
 
 
