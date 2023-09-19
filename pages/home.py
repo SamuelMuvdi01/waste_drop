@@ -9,7 +9,6 @@ from extra_streamlit_components import CookieManager
 
 if "login_status" not in st.session_state:
     st.session_state['login_status'] = False
-    switch_page("sign_up")
 
 
 def log_out():
