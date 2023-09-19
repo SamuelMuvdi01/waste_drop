@@ -10,7 +10,7 @@ import hashlib
 st.set_page_config(page_title="Sign_Up")
 st.title("Welcome, please sign up below")
 
-col1, col2, col3, col4 = st.columns(4)
+
 
 
 @st.cache_resource
@@ -45,6 +45,7 @@ last_name_val = st.text_input("Please enter last name", placeholder="Doe", key="
 email_val = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com", key="email")
 password_val = st.text_input("Please enter a password", key="password", placeholder="********", help="Password must be at least 8 characters long, have an upper case letter, and have a symbol")
 
+col1, col2, col3, col4 = st.columns(4)
 with col1:
      create_user_button = st.button("Create account", key="create_user_button")
 with col3:

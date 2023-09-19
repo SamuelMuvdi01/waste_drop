@@ -8,7 +8,7 @@ import pandas as pd
 
 st.set_page_config(page_title="Login")
 
-col1, col2, col3, col4 = st.columns(4)
+
 
 if "login_status" not in st.session_state:
     st.session_state['login_status'] = False
@@ -33,6 +33,7 @@ columns_db = ["id", "email", "first_name", "last_name", "timestamp", "password"]
 email_login = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com")
 password_login = st.text_input("Please enter password", type="password", placeholder="********")
 
+col1, col2, col3, col4 = st.columns(4)
 with col1:
     login_button = st.button("Login")
 
