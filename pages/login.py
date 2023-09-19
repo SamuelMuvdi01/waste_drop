@@ -9,6 +9,8 @@ import pandas as pd
 st.set_page_config(page_title="login")
 
 
+if "saved_user_name" not in st.session_state:
+    st.session_state["saved_user_name"] = ""
 
 if "login_status" not in st.session_state:
     st.session_state['login_status'] = False
@@ -43,7 +45,13 @@ if login_button:
     cursor.execute("SELECT * FROM public.users WHERE email ilike '{}' AND password = '{}'".format(email_login, hashed_password))
     login_results_query = cursor.fetchall()
     query_df = pd.DataFrame(login_results_query,columns=columns_db)
+
+    @st.cache_resource
+    def save_user_name():
+        st.session_state["saved_user_name"] = query_df["first_name"].values
+
     if(hashed_password == query_df["password"].values):
+        save_user_name()
         logged_in()
     else:
         st.write("Invalid email or password.")
