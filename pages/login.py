@@ -24,7 +24,7 @@ def init_connection():
 @st.cache_resource
 def logged_in():
     st.session_state["login_status"] = True
-    switch_page("home")
+    #switch_page("home")
     
 
 conn = init_connection()
@@ -48,9 +48,9 @@ if login_button:
 
     @st.cache_resource
     def save_user_name():
-        st.session_state["saved_user_name"] = query_df["last_name"].values
+        st.session_state["saved_user_name"] = query_df["first_name"].values
 
-    if(hashed_password == query_df["first_name"].values):
+    if(hashed_password == query_df["password"].values):
         save_user_name()
         logged_in()
     else:
