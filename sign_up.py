@@ -10,6 +10,8 @@ import hashlib
 st.set_page_config(page_title="Sign_Up")
 st.title("Welcome, please sign up below")
 
+col1, col2, col3, col4 = st.columns(4)
+
 
 @st.cache_resource
 def init_connection():
@@ -42,13 +44,18 @@ first_name_val = st.text_input("Please enter first name", placeholder="John", ke
 last_name_val = st.text_input("Please enter last name", placeholder="Doe", key="last_name")
 email_val = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com", key="email")
 password_val = st.text_input("Please enter a password", key="password", placeholder="********", help="Password must be at least 8 characters long, have an upper case letter, and have a symbol")
-create_user_button = st.button("Create account", key="create_user_button")
-if(st.button("login")):
+
+with col1:
+     create_user_button = st.button("Create account", key="create_user_button")
+with col3:
+    if(st.button("login")):
      switch_page("login")
 
 
 
-clear_button = st.button("Clear", on_click=clear_inputs)
+with col2:
+    clear_button = st.button("Clear", on_click=clear_inputs)
+    
 email_valid = bool(re.match(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b', email_val))
 pass_valid = bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$", password_val))
 
