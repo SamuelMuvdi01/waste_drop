@@ -24,7 +24,7 @@ def init_connection():
 @st.cache_resource
 def logged_in():
     st.session_state["login_status"] = True
-    #switch_page("home")
+    switch_page("home")
     
 
 conn = init_connection()
@@ -32,7 +32,7 @@ conn = init_connection()
 cursor = conn.cursor()
 
 
-columns_db = ["id", "email", "first_name", "last_name", "timestamp", "password"]
+columns_db = ["id", "first_name", "last_name", "email", "timestamp", "password"]
 email_login = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com")
 password_login = st.text_input("Please enter password", type="password", placeholder="********")
 
@@ -50,9 +50,8 @@ if login_button:
     def save_user_name():
         st.session_state["saved_user_name"] = query_df["last_name"].values
 
-    if(hashed_password == query_df["password"].values):
+    if(hashed_password == query_df["first_name"].values):
         save_user_name()
-        st.write(query_df["id"].values,query_df["email"].values,query_df["first_name"].values, query_df["last_name"].values)
         logged_in()
     else:
         st.write("Invalid email or password.")
