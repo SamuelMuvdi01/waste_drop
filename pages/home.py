@@ -39,14 +39,13 @@ if(st.session_state["login_status"] == True):
     cursor = conn.cursor()
 
     def get_all_binz_names():
-        cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
+        cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id[2:38]))
         return cursor.fetchone()
 
     st.write("Welcome! ",st.session_state["saved_user_name"])
     logout_button = st.sidebar.button("log off", on_click=log_out)
     user_id = st.session_state["saved_user_id"]
     st.header("Create new Binz below")
-    st.write(user_id[2:38])
     binz_name = st.text_input("Enter the name of binz to create")
     create_binz_but = st.button("Create")
 
@@ -59,7 +58,7 @@ if(st.session_state["login_status"] == True):
 
 
     st.header('View all binz')
-    cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
+    cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id[2:38]))
     binz_results = cursor.fetchall()
     st.dataframe(binz_results)
 
