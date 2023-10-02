@@ -57,7 +57,7 @@ if(st.session_state["login_status"] == True):
     if create_binz_but:
         st.write(binz_name)
         try:
-            cursor.execute("INSERT INTO public.binz_owners(binz_name, user_id) VALUES('{}', '{}')".format(hf.capitalize(binz_name), user_id))
+            cursor.execute("INSERT INTO public.binz_owners(binz_name, user_id) VALUES('{}', '{}')".format(binz_name, user_id))
         except:
             if(binz_name in get_all_binz_names()):
                 st.error(":red[This binz already exists!]")
