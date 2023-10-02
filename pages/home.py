@@ -44,6 +44,7 @@ if(st.session_state["login_status"] == True):
     logout_button = st.sidebar.button("log off", on_click=log_out)
     user_id = st.session_state["saved_user_id"]
     user_id = user_id.replace("['", "").replace("']", "")
+    st.wrte(user_id)
     st.header("Create new Binz below")
     binz_name = st.text_input("Enter the name of binz to create")
     create_binz_but = st.button("Create")
@@ -61,9 +62,9 @@ if(st.session_state["login_status"] == True):
 
 
     st.header('View all binz')
-    cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
-    binz_results = cursor.fetchall()
-    st.dataframe(binz_results)
+   # cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
+   # binz_results = cursor.fetchall()
+   # st.dataframe(binz_results)
 
 
 
