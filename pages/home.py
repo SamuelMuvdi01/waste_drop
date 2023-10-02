@@ -8,6 +8,7 @@ import sys
 from extra_streamlit_components import CookieManager
 import psycopg2
 import helperfuncs as hf
+import re
 
 
 if "login_status" not in st.session_state:
@@ -43,7 +44,7 @@ if(st.session_state["login_status"] == True):
     st.write("Welcome! ",st.session_state["saved_user_name"])
     logout_button = st.sidebar.button("log off", on_click=log_out)
     user_id = st.session_state["saved_user_id"]
-    user_id = user_id.replace("'[", "").replace("]'", "")
+    user_id = re.sub("'[]'", "", user_id)
     st.write(user_id)
     st.header("Create new Binz below")
     binz_name = st.text_input("Enter the name of binz to create")
