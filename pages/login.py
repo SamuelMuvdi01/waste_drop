@@ -12,6 +12,9 @@ st.set_page_config(page_title="login")
 if "saved_user_name" not in st.session_state:
     st.session_state["saved_user_name"] = ""
 
+if "saved_user_id" not in st.session_state:
+    st.session_state["saved_user_id"] = ""
+
 if "login_status" not in st.session_state:
     st.session_state['login_status'] = False
 
@@ -49,6 +52,10 @@ if login_button:
     @st.cache_resource
     def save_user_name():
         st.session_state["saved_user_name"] = str(query_df["first_name"].values)
+
+    @st.cache_resource
+    def save_user_name():
+        st.session_state["saved_user_id"] = str(query_df["id"].values)
 
     if(hashed_password == query_df["password"].values):
         save_user_name()
