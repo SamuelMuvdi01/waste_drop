@@ -55,6 +55,7 @@ if(st.session_state["login_status"] == True):
         return cursor.fetchone()
 
     if create_binz_but:
+        st.write(binz_name)
         try:
             cursor.execute("INSERT INTO public.binz_owners(binz_name, user_id) VALUES('{}', '{}')".format(hf.capitalize(binz_name), user_id))
         except:
