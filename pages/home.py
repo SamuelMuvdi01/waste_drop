@@ -40,7 +40,7 @@ if(st.session_state["login_status"] == True):
 
     def get_all_binz_names():
         cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
-        st.write(cursor.fetchone())
+        st.write(user_id)
         return cursor.fetchone()
 
     st.write("Welcome! ",st.session_state["saved_user_name"])
