@@ -46,7 +46,7 @@ if(st.session_state["login_status"] == True):
     logout_button = st.sidebar.button("log off", on_click=log_out)
     user_id = st.session_state["saved_user_id"]
     st.header("Create new Binz below")
-    st.write(user_id[0])
+    st.write(user_id[2:36])
     binz_name = st.text_input("Enter the name of binz to create")
     create_binz_but = st.button("Create")
 
