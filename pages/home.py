@@ -59,7 +59,7 @@ if(st.session_state["login_status"] == True):
 
 
     st.header('View all binz')
-    cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
+    cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = {};".format(user_id))
     binz_results = cursor.fetchall()
     st.dataframe(binz_results)
 
