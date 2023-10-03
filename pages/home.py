@@ -63,8 +63,8 @@ if(st.session_state["login_status"] == True):
    # cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
     cursor.execute("SELECT binz_name FROM public.binz_owners")
     binz_results = cursor.fetchall()
-    binz_results = pd.DataFrame(binz_results)
-    st.table(binz_results)
+    binz_results = pd.DataFrame(binz_results, columns=['Binz Name'])
+    st.dataframe(binz_results)
 
 
 
