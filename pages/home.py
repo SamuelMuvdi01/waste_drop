@@ -47,15 +47,12 @@ if(st.session_state["login_status"] == True):
 
     def get_all_binz_names():
        cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
-       st.write(cursor.fetchall())
        return cursor.fetchall()
 
     if create_binz_but:
-        try:
             cursor.execute("INSERT INTO public.binz_owners(binz_name, user_id) VALUES('{}', '{}')".format(binz_name, user_id))
             conn.commit()
             st.write(":green[Binz created!]")
-        except:
             if(binz_name in get_all_binz_names()):
                 st.error(":red[This binz already exists!]")
 
