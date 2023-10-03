@@ -8,7 +8,7 @@ import sys
 from extra_streamlit_components import CookieManager
 import psycopg2
 import helperfuncs as hf
-from login import conn
+from pages.login import conn
 
 
 
