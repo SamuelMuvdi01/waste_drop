@@ -64,6 +64,7 @@ if(st.session_state["login_status"] == True):
     cursor.execute("SELECT binz_name FROM public.binz_owners")
     binz_results = cursor.fetchall()
     pd.dataframe(binz_results)
+    print(binz_results)
 
 
 
