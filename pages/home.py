@@ -54,6 +54,8 @@ if(st.session_state["login_status"] == True):
         st.write(binz_name)
         try:
             cursor.execute("INSERT INTO public.binz_owners(binz_name, user_id) VALUES('{}', '{}')".format(binz_name, user_id))
+            conn.commit()
+            st.write(":green[Account created!]")
         except:
             if(binz_name in get_all_binz_names()):
                 st.error(":red[This binz already exists!]")
