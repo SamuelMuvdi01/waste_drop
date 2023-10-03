@@ -49,7 +49,7 @@ if(st.session_state["login_status"] == True):
     user_binz_list = cursor.fetchall()
 
     if create_binz_but:
-            for i in user_binz_list
+            for i in user_binz_list:
                 if(binz_name in user_binz_list):
                     st.error(":red[This binz already exists!]")
             else:
