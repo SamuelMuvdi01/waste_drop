@@ -53,10 +53,10 @@ if(st.session_state["login_status"] == True):
             for i in user_binz_list:
                 if(i in user_binz_list):
                     st.error(":red[This binz already exists!]")
-            else:
-                cursor.execute("INSERT INTO public.binz_owners(binz_name, user_id) VALUES('{}', '{}')".format(binz_name, user_id))
-                conn.commit()
-                st.write(":green[Binz created!]")
+                else:
+                    cursor.execute("INSERT INTO public.binz_owners(binz_name, user_id) VALUES('{}', '{}')".format(binz_name, user_id))
+                    conn.commit()
+                    st.write(":green[Binz created!]")
 
 
 
