@@ -47,6 +47,7 @@ if(st.session_state["login_status"] == True):
 
     cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
     user_binz_list = cursor.fetchall()
+    st.write(user_binz_list)
 
     if create_binz_but:
             for i in user_binz_list:
