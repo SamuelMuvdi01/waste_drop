@@ -8,7 +8,8 @@ import sys
 from extra_streamlit_components import CookieManager
 import psycopg2
 import helperfuncs as hf
-import re
+from login import conn
+
 
 
 if "login_status" not in st.session_state:
@@ -31,11 +32,6 @@ st.title('WasteDrop')
 
 if(st.session_state["login_status"] == True):
 
-    @st.cache_resource
-    def init_connection():
-        return psycopg2.connect(**st.secrets["postgres"])
-
-    conn = init_connection()
 
     cursor = conn.cursor()
 
