@@ -45,16 +45,17 @@ if(st.session_state["login_status"] == True):
     binz_name = st.text_input("Enter the name of binz to create")
     create_binz_but = st.button("Create")
 
-    def get_all_binz_names():
-       cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
-       return cursor.fetchall()
+    cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
+    user_binz_list = cursor.fetchall()
 
     if create_binz_but:
-            cursor.execute("INSERT INTO public.binz_owners(binz_name, user_id) VALUES('{}', '{}')".format(binz_name, user_id))
-            conn.commit()
-            st.write(":green[Binz created!]")
-            if(binz_name in get_all_binz_names()):
+            if(binz_name in user_binz_list):
                 st.error(":red[This binz already exists!]")
+            else:
+                cursor.execute("INSERT INTO public.binz_owners(binz_name, user_id) VALUES('{}', '{}')".format(binz_name, user_id))
+                conn.commit()
+                st.write(":green[Binz created!]")
+
 
 
     st.header('View all binz')
