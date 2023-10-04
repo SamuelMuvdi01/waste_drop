@@ -36,8 +36,9 @@ if(st.session_state["login_status"] == True):
     cursor = conn.cursor()
 
 
-
-    st.write("Welcome! ",st.session_state["saved_user_name"])
+    users_name = st.session_state["saved_user_name"]
+    users_name = users_name.replace("'", "").replace("[","").replace("]","")
+    st.write("Welcome! ",users_name)
     logout_button = st.sidebar.button("log off", on_click=log_out)
     user_id = st.session_state["saved_user_id"]
     user_id = user_id.replace("'", "").replace("[", "").replace("]", "")
