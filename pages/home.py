@@ -47,10 +47,13 @@ if(st.session_state["login_status"] == True):
 
     cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
     user_binz_list = cursor.fetchall()
-    st.write(user_binz_list)
+    user_binz_arr = []
+    for elem1 in user_binz_list:
+        for elem2 in elem1:
+            user_binz_arr.append(elem2)
 
     if create_binz_but:
-                if(binz_name in user_binz_list):
+                if(binz_name in user_binz_arr):
                     st.error(":red[This binz already exists!]")
                 else:
                     cursor.execute("INSERT INTO public.binz_owners(binz_name, user_id) VALUES('{}', '{}')".format(binz_name, user_id))
