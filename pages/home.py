@@ -9,17 +9,16 @@ from extra_streamlit_components import CookieManager
 import psycopg2
 import helperfuncs as hf
 from pages.login import conn
+from pages.login import saved
 
 
-
-if "login_status" not in st.session_state:
-    st.session_state['login_status'] = False
 
 if "saved_user_name" not in st.session_state:
     st.session_state["saved_user_name"] = ""
 
-if "saved_user_id" not in st.session_state:
-    st.session_state["saved_user_id"] = ""
+
+if "login_status" not in st.session_state:
+    st.session_state['login_status'] = False
 
 
 def log_out():
