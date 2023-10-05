@@ -42,10 +42,10 @@ if(st.session_state["login_status"] == True):
     logout_button = st.sidebar.button("log off", on_click=log_out)
     user_id = st.session_state["saved_user_id"]
     user_id = user_id.replace("'", "").replace("[", "").replace("]", "")
+    st.write(user_id)
     st.header("Create new Binz below")
     binz_name = st.text_input("Enter the name of binz to create")
     create_binz_but = st.button("Create")
-    st.write(type(user_id))
     cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
     user_binz_list = cursor.fetchall()
     user_binz_arr = []
