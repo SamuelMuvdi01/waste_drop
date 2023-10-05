@@ -15,6 +15,8 @@ from pages.login import conn
 if "saved_user_name" not in st.session_state:
     st.session_state["saved_user_name"] = ""
 
+if "saved_user_id" not in st.session_state:
+    st.session_state["saved_user_id"] = ""
 
 if "login_status" not in st.session_state:
     st.session_state['login_status'] = False
