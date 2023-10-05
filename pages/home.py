@@ -9,6 +9,7 @@ from extra_streamlit_components import CookieManager
 import psycopg2
 import helperfuncs as hf
 from pages.login import conn
+from pages.login import user_id
 
 
 
@@ -40,12 +41,9 @@ if(st.session_state["login_status"] == True):
     users_name = users_name.replace("'", "").replace("[","").replace("]","")
     st.write("Welcome! ",users_name)
     logout_button = st.sidebar.button("log off", on_click=log_out)
-    user_id = st.session_state["saved_user_id"]
-    user_id = user_id.replace("'", "").replace("[", "").replace("]", "")
     st.header("Create new Binz below")
     binz_name = st.text_input("Enter the name of binz to create")
     create_binz_but = st.button("Create")
-    st.write(type(user_id))
     cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
     user_binz_list = cursor.fetchall()
     user_binz_arr = []
