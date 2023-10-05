@@ -51,16 +51,14 @@ if login_button:
 
     @st.cache_resource
     def save_user_name():
-        user_name = str(query_df["first_name"].values)
-        return user_name
-        #st.session_state["saved_user_name"] = str(query_df["first_name"].values)
-    saved_user_name = save_user_name()
+        st.session_state["saved_user_name"] = str(query_df["first_name"].values)
+        return st.session_state["saved_user_name"]
+
     @st.cache_resource
     def save_user_id():
-        user_id = str(query_df["id"].values)
-        return user_id
-        #st.session_state["saved_user_id"] = str(query_df["id"].values)
-    saved_user_id = save_user_id()
+        st.session_state["saved_user_id"] = str(query_df["id"].values)
+        return st.session_state["saved_user_id"]
+
     if(hashed_password == query_df["password"].values):
         save_user_name()
         save_user_id()
