@@ -9,19 +9,17 @@ from extra_streamlit_components import CookieManager
 import psycopg2
 import helperfuncs as hf
 from pages.login import conn
-from pages.login import save_user_name
-from pages.login import save_user_id
 
 
-
-if "login_status" not in st.session_state:
-    st.session_state['login_status'] = False
 
 if "saved_user_name" not in st.session_state:
     st.session_state["saved_user_name"] = ""
 
 if "saved_user_id" not in st.session_state:
     st.session_state["saved_user_id"] = ""
+
+if "login_status" not in st.session_state:
+    st.session_state['login_status'] = False
 
 
 def log_out():
@@ -38,34 +36,35 @@ if(st.session_state["login_status"] == True):
     cursor = conn.cursor()
 
 
-    users_name = save_user_name()
+    users_name = st.session_state["saved_user_name"]
     users_name = users_name.replace("'", "").replace("[","").replace("]","")
     st.write("Welcome! ",users_name)
     logout_button = st.sidebar.button("log off", on_click=log_out)
-    user_id = save_user_id()
+    user_id = st.session_state["saved_user_id"]
     user_id = user_id.replace("'", "").replace("[", "").replace("]", "")
+    st.write(user_id)
     st.header("Create new Binz below")
     binz_name = st.text_input("Enter the name of binz to create")
     create_binz_but = st.button("Create")
-    cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
-    user_binz_list = cursor.fetchall()
-    user_binz_arr = []
-    for elem1 in user_binz_list:
-        for elem2 in elem1:
-            user_binz_arr.append(elem2)
+    #cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
+    #user_binz_list = cursor.fetchall()
+    #user_binz_arr = []
+    #for elem1 in user_binz_list:
+      #  for elem2 in elem1:
+       #     user_binz_arr.append(elem2)
 
-    if create_binz_but:
-                if(binz_name in user_binz_arr):
-                    st.error(":red[This binz already exists!]")
-                else:
-                    cursor.execute("INSERT INTO public.binz_owners(binz_name, user_id) VALUES('{}', '{}')".format(binz_name, user_id))
-                    conn.commit()
-                    st.write(":green[Binz created!]")
+   # if create_binz_but:
+   #             if(binz_name in user_binz_arr):
+   #                 st.error(":red[This binz already exists!]")
+   #             else:
+   #                 cursor.execute("INSERT INTO public.binz_owners(binz_name, user_id) VALUES('{}', '{}')".format(binz_name, user_id))
+   #                 conn.commit()
+   #                 st.write(":green[Binz created!]")
 
 
 
     st.header('View all binz')
-    cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
+   # cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
     binz_results = cursor.fetchall()
     binz_results = pd.DataFrame(binz_results, columns=['Binz Name'])
     st.dataframe(binz_results)
