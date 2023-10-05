@@ -34,7 +34,7 @@ conn = init_connection()
 
 cursor = conn.cursor()
 
-
+user_id =''
 columns_db = ["id", "first_name", "last_name", "email", "timestamp", "password"]
 email_login = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com")
 password_login = st.text_input("Please enter password", type="password", placeholder="********")
