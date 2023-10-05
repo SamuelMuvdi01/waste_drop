@@ -49,19 +49,22 @@ if login_button:
     login_results_query = cursor.fetchall()
     query_df = pd.DataFrame(login_results_query,columns=columns_db)
 
-    @st.cache_resource
+    @st.cache_data
     def save_user_name():
-        st.session_state["saved_user_name"] = str(query_df["first_name"].values)
+        user_name = str(query_df["first_name"].values)
+        user_name = user_name.replace("'", "").replace("[", "").replace("]", "")
 
-    @st.cache_resource
+       #st.session_state["saved_user_name"] = str(query_df["first_name"].values)
+
+    @st.cache_data
     def save_user_id():
-        st.session_state["saved_user_id"] = str(query_df["id"].values)
+        user_id = str(query_df["id"].values)
+        user_id = user_id.replace("'", "").replace("[", "").replace("]", "")
+        #st.session_state["saved_user_id"] = str(query_df["id"].values)
 
     if(hashed_password == query_df["password"].values):
         save_user_name()
         save_user_id()
-        user_id = st.session_state["saved_user_id"]
-        user_id = user_id.replace("'", "").replace("[", "").replace("]", "")
         logged_in()
     else:
         st.write("Invalid email or password.")
