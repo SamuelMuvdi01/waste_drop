@@ -47,19 +47,19 @@ if(st.session_state["login_status"] == True):
     binz_name = st.text_input("Enter the name of binz to create")
     create_binz_but = st.button("Create")
     #cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
-    user_binz_list = cursor.fetchall()
-    user_binz_arr = []
-    for elem1 in user_binz_list:
-        for elem2 in elem1:
-            user_binz_arr.append(elem2)
+    #user_binz_list = cursor.fetchall()
+    #user_binz_arr = []
+    #for elem1 in user_binz_list:
+      #  for elem2 in elem1:
+       #     user_binz_arr.append(elem2)
 
-    if create_binz_but:
-                if(binz_name in user_binz_arr):
-                    st.error(":red[This binz already exists!]")
-                else:
-                    cursor.execute("INSERT INTO public.binz_owners(binz_name, user_id) VALUES('{}', '{}')".format(binz_name, user_id))
-                    conn.commit()
-                    st.write(":green[Binz created!]")
+   # if create_binz_but:
+   #             if(binz_name in user_binz_arr):
+   #                 st.error(":red[This binz already exists!]")
+   #             else:
+   #                 cursor.execute("INSERT INTO public.binz_owners(binz_name, user_id) VALUES('{}', '{}')".format(binz_name, user_id))
+   #                 conn.commit()
+   #                 st.write(":green[Binz created!]")
 
 
 
