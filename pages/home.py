@@ -9,19 +9,19 @@ from extra_streamlit_components import CookieManager
 import psycopg2
 import helperfuncs as hf
 from pages.login import conn
-from pages.login import save_user_name
-from pages.login import save_user_id
+from pages.login import saved_user_name
+from pages.login import saved_user_id
 
 
 
 if "login_status" not in st.session_state:
     st.session_state['login_status'] = False
 
-if "saved_user_name" not in st.session_state:
-    st.session_state["saved_user_name"] = ""
+#if "saved_user_name" not in st.session_state:
+#    st.session_state["saved_user_name"] = ""
 
-if "saved_user_id" not in st.session_state:
-    st.session_state["saved_user_id"] = ""
+#if "saved_user_id" not in st.session_state:
+#    st.session_state["saved_user_id"] = ""
 
 
 def log_out():
@@ -38,11 +38,13 @@ if(st.session_state["login_status"] == True):
     cursor = conn.cursor()
 
 
-    users_name = save_user_name()
+    #users_name = st.session_state["saved_user_name"]
+    users_name = saved_user_name
     users_name = users_name.replace("'", "").replace("[","").replace("]","")
     st.write("Welcome! ",users_name)
     logout_button = st.sidebar.button("log off", on_click=log_out)
-    user_id = save_user_id()
+    #user_id = st.session_state["saved_user_id"]
+    user_id = saved_user_id
     user_id = user_id.replace("'", "").replace("[", "").replace("]", "")
     st.header("Create new Binz below")
     binz_name = st.text_input("Enter the name of binz to create")
