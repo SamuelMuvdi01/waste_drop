@@ -49,11 +49,11 @@ if login_button:
     login_results_query = cursor.fetchall()
     query_df = pd.DataFrame(login_results_query,columns=columns_db)
 
-    @st.cache_resource
+    @st.cache_data
     def save_user_name():
         st.session_state["saved_user_name"] = str(query_df["first_name"].values)
 
-    @st.cache_resource
+    @st.cache_data
     def save_user_id():
         st.session_state["saved_user_id"] = str(query_df["id"].values)
 
