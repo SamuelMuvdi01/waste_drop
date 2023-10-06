@@ -42,7 +42,7 @@ if(st.session_state["login_status"] == True):
     st.header("Create new Binz below")
     binz_name = st.text_input("Enter the name of binz to create")
     create_binz_but = st.button("Create")
-    st.write("execute query: SELECT binz_name FROM public.binz_owners WHERE user_id = '{}'".format(user_id))
+    st.write("execute query: SELECT binz_name FROM public.binz_owners WHERE user_id = '{}'".format(st.session_state.saved_user_id))
     cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
     user_binz_list = cursor.fetchall()
     user_binz_arr = []
