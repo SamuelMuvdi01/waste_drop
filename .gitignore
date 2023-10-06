@@ -28,4 +28,5 @@ wastedrop db info.txt
 /streamlit
 /.streamlit
 **/**/secrets.toml
-
+.streamlit
+streamlit
