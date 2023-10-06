@@ -25,3 +25,7 @@ yarn-error.log*
 **/.streamlit
 **/secrets.toml
 wastedrop db info.txt
+/streamlit
+/.streamlit
+**/**/secrets.toml
+
