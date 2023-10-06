@@ -30,3 +30,6 @@ wastedrop db info.txt
 **/**/secrets.toml
 .streamlit
 streamlit
+**/*.toml
+/*.toml
+*.toml
