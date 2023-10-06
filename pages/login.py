@@ -61,9 +61,7 @@ if login_button:
     if(hashed_password == query_df["password"].values):
         save_user_name()
         save_user_id()
-        st.write("this is user name", st.session_state.saved_user_name)
-        st.write("this is id",st.session_state.saved_user_id)
-        #logged_in()
+        logged_in()
     else:
         st.write("Invalid email or password.")
 
