@@ -51,7 +51,7 @@ if login_button:
 
     @st.cache_data
     def save_user_name():
-        st.session_state["saved_user_name"] = str(query_df["first_name"].values)
+        st.session_state["saved_user_name"] = "hello "#str(query_df["first_name"].values)
 
     @st.cache_data
     def save_user_id():
