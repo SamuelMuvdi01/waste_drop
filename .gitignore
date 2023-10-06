@@ -33,3 +33,4 @@ streamlit
 **/*.toml
 /*.toml
 *.toml
+*.toml
