@@ -31,8 +31,9 @@ if(st.session_state["login_status"] == True):
 
 
     cursor = conn.cursor()
-
-
+    
+    st.write(st.session_state.saved_user_name)
+    st.write(st.session_state.saved_user_id)
     users_name = st.session_state["saved_user_name"]
     users_name = users_name.replace("'", "").replace("[","").replace("]","")
     st.write("Welcome! ",users_name)
