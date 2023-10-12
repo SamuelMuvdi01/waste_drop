@@ -6,8 +6,8 @@ import psycopg2
 import hashlib
 import pandas as pd
 
-if(st.session_state["login_status"] == False):
-    st.set_page_config(page_title="login")
+
+st.set_page_config(page_title="login")
 
 
 if "saved_user_name" not in st.session_state:

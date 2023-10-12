@@ -7,9 +7,8 @@ import psycopg2
 import helperfuncs as hf
 import hashlib
 
-if(st.session_state["login_status"] == False):
-    st.set_page_config(page_title="Sign_Up")
-    st.title("Welcome, please sign up below")
+st.set_page_config(page_title="Sign_Up")
+st.title("Welcome, please sign up below")
 
 
 
