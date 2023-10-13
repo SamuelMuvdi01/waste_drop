@@ -29,16 +29,13 @@ st.title('WasteDrop')
 
 if(st.session_state["login_status"] == True):
 
-    st.sidebar.title("Binz")
-    st.sidebar.write("Option 1")
-    st.sidebar.write("Option 2")
-
     cursor = conn.cursor()
     
     users_name = st.session_state["saved_user_name"]
     users_name = users_name.replace("'", "").replace("[","").replace("]","")
     st.write("Welcome! ",users_name)
-    logout_button = st.sidebar.button("log off", on_click=log_out)
+    logout_button = st.sidebar.button("Log Off", on_click=log_out)
+    st.sidebar.title("Binz")
     user_id = st.session_state["saved_user_id"]
     user_id = user_id.replace("'", "").replace("[", "").replace("]", "")
     st.header("Create new Binz below")
@@ -65,7 +62,7 @@ if(st.session_state["login_status"] == True):
     cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
     binz_results = cursor.fetchall()
     binz_results = pd.DataFrame(binz_results, columns=['Binz Name'])
-    st.dataframe(binz_results)
+    st.sidebar.button(binz_results)
 
 
 
