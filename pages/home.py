@@ -62,7 +62,8 @@ if(st.session_state["login_status"] == True):
     cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
     binz_results = cursor.fetchall()
     binz_results = pd.DataFrame(binz_results, columns=['Binz Name'])
-    st.sidebar.button(binz_results)
+    for i in binz_results:
+        st.sidebar.button(i)
 
 
 
