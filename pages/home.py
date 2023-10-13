@@ -29,6 +29,9 @@ st.title('WasteDrop')
 
 if(st.session_state["login_status"] == True):
 
+    st.sidebar.title("Binz")
+    st.sidebar.write("Option 1")
+    st.sidebar.write("Option 2")
 
     cursor = conn.cursor()
     
