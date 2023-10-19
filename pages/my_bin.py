@@ -15,6 +15,9 @@ if "login_status" not in st.session_state:
 if "saved_user_id" not in st.session_state:
     st.session_state["saved_user_id"] = ""
 
+if "selected_binz" not in st.session_state:
+    st.session_state["selected_binz"] = ""
+
 if(st.session_state["login_status"] == False):
     st.write('PLEASE LOG IN!')
 else:
