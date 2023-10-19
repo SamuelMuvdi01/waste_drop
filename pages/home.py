@@ -9,8 +9,6 @@ import psycopg2
 import helperfuncs as hf
 from pages.login import conn
 
-st.set_page_config(page_title="home")
-
 if "saved_user_name" not in st.session_state:
     st.session_state["saved_user_name"] = ""
 
@@ -25,7 +23,7 @@ def log_out():
     switch_page("sign_up")
 
 def switch_to_binz_page():
-    switch_page("binz")
+    switch_page("my_bin")
 
 st.title('WasteDrop')
 
