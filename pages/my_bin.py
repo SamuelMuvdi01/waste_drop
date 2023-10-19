@@ -42,13 +42,13 @@ else:
     binz_uuid = binz_uuid[0]
     now = datetime.now().date()  # Convert datetime to date
     
-    if add_binz_item and len(binz_name) >= 2:
+    if add_binz_item and len(binz_item) >= 2:
         if exp_date < now:
             st.error('Date must be greater than today!')
         else:
             cursor.execute("INSERT INTO public.items(binz_id, quantity, expiry_date, item_name) VALUES('{}', '{}', '{}', '{}')".format(binz_uuid, count, exp_date, binz_item))
             conn.commit()
             st.write(":green[Item Added!]")
-    elif add_binz_item and len(binz_name) < 2:
+    elif add_binz_item and len(binz_item) < 2:
         st.error("Binz item must have a name!")
         
