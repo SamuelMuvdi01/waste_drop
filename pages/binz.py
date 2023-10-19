@@ -15,9 +15,6 @@ def log_out():
     st.session_state['login_status'] = False
     switch_page("sign_up")
 
-def back():
-    switch_page("home")
-
 
 binz_item = st.text_input("Add an Item to bin: ")
 exp_date = st.date_input("Please Enter Item Expiration")
