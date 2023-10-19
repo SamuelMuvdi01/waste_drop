@@ -29,7 +29,7 @@ else:
     count = st.number_input("Please Enter Item Quantity: ", step=1, min_value=1)
     add_binz_item = st.button("Add Item")
     binz_uuid = st.session_state["selected_binz"]
-    logout_button = st.sidebar.button("Log Off", on_click=log_out)
+
 
     cursor.execute("INSERT INTO public.items(binz_id, quantity, expiry_date) VALUES('{}', '{}', '{}')".format(binz_uuid, count, exp_date))
     cursor.commit()
