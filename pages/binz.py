@@ -8,10 +8,20 @@ from extra_streamlit_components import CookieManager
 import psycopg2
 import helperfuncs as hf
 from pages.login import conn
-import time
 
 st.title(st.session_state["selected_binz"])
 
+def log_out():
+    st.session_state['login_status'] = False
+    switch_page("sign_up")
+
+def back():
+    switch_page("home")
+
+
 binz_item = st.text_input("Add an Item to bin: ")
 exp_date = st.date_input("Please Enter Item Expiration")
-create_binz_but = st.button("Add Item")
+add_binz_item = st.button("Add Item")
+
+logout_button = st.sidebar.button("Log Off", on_click=log_out)
+back_button = st.sidebar.button("Back", on_click=back)
