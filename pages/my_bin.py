@@ -42,5 +42,5 @@ else:
     binz_uuid = binz_uuid[0]
     st.write("This is the uuid", binz_uuid)
     cursor.execute("INSERT INTO public.items(binz_id, quantity, expiry_date) VALUES('{}', '{}', '{}')".format(binz_uuid, count, exp_date))
-    cursor.commit()
+    conn.commit()
     st.write(":green[Item Added!]")
