@@ -51,8 +51,6 @@ with col3:
     if(st.button("login")):
      switch_page("login")
 
-
-
 with col2:
     clear_button = st.button("Clear", on_click=clear_inputs)
     
