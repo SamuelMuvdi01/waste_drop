@@ -10,6 +10,7 @@ import helperfuncs as hf
 from pages.login import conn
 import pages.home as hm
 import time
+from datetime import datetime
 
 if "login_status" not in st.session_state:
     st.session_state['login_status'] = False
@@ -39,10 +40,12 @@ else:
     cursor.execute("SELECT binz_id FROM public.binz_owners WHERE binz_name = '{}' and user_id = '{}';".format(binz_name, user_id))
     binz_uuid = cursor.fetchone()
     binz_uuid = binz_uuid[0]
-    st.write("This is the uuid", binz_uuid)
     
     if add_binz_item:
-        st.write(exp_date)
-        cursor.execute("INSERT INTO public.items(binz_id, quantity, expiry_date, item_name) VALUES('{}', '{}', '{}', '{}')".format(binz_uuid, count, exp_date, binz_item))
-        conn.commit()
-        st.write(":green[Item Added!]")
+        now = datetime.now()
+        if exp_date < now:
+            st.error('Date must be greater than today!')
+        else:
+            cursor.execute("INSERT INTO public.items(binz_id, quantity, expiry_date, item_name) VALUES('{}', '{}', '{}', '{}')".format(binz_uuid, count, exp_date, binz_item))
+            conn.commit()
+            st.write(":green[Item Added!]")
