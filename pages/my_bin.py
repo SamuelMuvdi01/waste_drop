@@ -7,7 +7,7 @@ import sys
 from extra_streamlit_components import CookieManager
 import psycopg2
 import helperfuncs as hf
-from pages.home import conn
+from pages.home import cursor
 
 if "login_status" not in st.session_state:
     st.session_state['login_status'] = False
@@ -21,4 +21,22 @@ if "selected_binz" not in st.session_state:
 if(st.session_state["login_status"] == False):
     st.write('PLEASE LOG IN!')
 else:
-    pass
+
+    st.title(st.session_state["selected_binz"])
+
+
+    def log_out():
+        st.session_state['login_status'] = False
+        switch_page("sign_up")
+
+    
+    binz_item = st.text_input("Add an Item to bin: ")
+    exp_date = st.date_input("Please Enter Item Expiration: ")
+    count = st.number_input("Please Enter Item Quantity: ", step=1, min_value=1)
+    add_binz_item = st.button("Add Item")
+    binz_uuid = st.session_state["selected_binz"]
+    logout_button = st.sidebar.button("Log Off", on_click=log_out)
+
+    cursor.execute("INSERT INTO public.items(binz_id, quantity, expiry_date) VALUES('{}', '{}', '{}')".format(binz_uuid, count, exp_date))
+    cursor.commit()
+    st.write(":green[Item Added!]")
