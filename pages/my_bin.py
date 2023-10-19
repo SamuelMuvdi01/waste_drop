@@ -40,12 +40,15 @@ else:
     cursor.execute("SELECT binz_id FROM public.binz_owners WHERE binz_name = '{}' and user_id = '{}';".format(binz_name, user_id))
     binz_uuid = cursor.fetchone()
     binz_uuid = binz_uuid[0]
+    now = datetime.now().date()  # Convert datetime to date
     
-    if add_binz_item:
-        now = datetime.now().date()  # Convert datetime to date
+    if add_binz_item and binz_name != None:
         if exp_date < now:
             st.error('Date must be greater than today!')
         else:
             cursor.execute("INSERT INTO public.items(binz_id, quantity, expiry_date, item_name) VALUES('{}', '{}', '{}', '{}')".format(binz_uuid, count, exp_date, binz_item))
             conn.commit()
             st.write(":green[Item Added!]")
+    elif add_binz_item and binz_name == None:
+        st.error("Binz item must have a name!")
+        
