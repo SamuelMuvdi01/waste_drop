@@ -36,7 +36,7 @@ else:
     count = st.number_input("Please Enter Item Quantity: ", step=1, min_value=1)
     add_binz_item = st.button("Add Item")
     binz_name = st.session_state["selected_binz"]
-    #cursor.execute("SELECT binz_id FROM public.binz_owners WHERE binz_name = '{}' and user_id = '{}';").format(binz_name, user_id)
+    cursor.execute("SELECT binz_id FROM public.binz_owners WHERE binz_name = '{}' and user_id = '{}';".format(binz_name, user_id))
     #binz_uuid = cursor.fetchone()
 
 
