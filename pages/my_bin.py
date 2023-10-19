@@ -7,7 +7,7 @@ import sys
 from extra_streamlit_components import CookieManager
 import psycopg2
 import helperfuncs as hf
-from pages.home import cursor
+from pages.login import conn
 
 if "login_status" not in st.session_state:
     st.session_state['login_status'] = False
@@ -21,6 +21,8 @@ if "selected_binz" not in st.session_state:
 if(st.session_state["login_status"] == False):
     st.write('PLEASE LOG IN!')
 else:
+
+    cursor = conn.cursor()
 
     st.title(st.session_state["selected_binz"])
 
