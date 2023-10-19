@@ -57,12 +57,11 @@ if(st.session_state["login_status"] == True):
                     st.write(":green[Binz created!]")
 
 
-
-    st.header('View all binz')
     cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
     binz_results = cursor.fetchall()
     for binz_result in binz_results:
-        st.sidebar.button(binz_result[0])
+        if st.sidebar.button(binz_result[0], key=binz_result[0]):
+            st.header["selected_binz"] = binz_result[0]
 
 
 
