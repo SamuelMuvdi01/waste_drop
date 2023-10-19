@@ -23,7 +23,7 @@ def log_out():
     switch_page("sign_up")
 
 def switch_to_binz_page():
-    st.title('Binz')
+    switch_page("binz")
 
 st.title('WasteDrop')
 
