@@ -25,8 +25,13 @@ def log_out():
 def switch_to_binz_page():
     st.title('Binz')
 
-def switch_to_home_page():
+st.title('WasteDrop')
+
+
+if(st.session_state["login_status"] == True):
+
     cursor = conn.cursor()
+    
     users_name = st.session_state["saved_user_name"]
     users_name = users_name.replace("'", "").replace("[","").replace("]","")
     st.write("Welcome! ",users_name)
@@ -53,17 +58,11 @@ def switch_to_home_page():
                     st.write(":green[Binz created!]")
 
     cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
-st.title('WasteDrop')
-
-if(st.session_state["login_status"] == True):
-    switch_to_home_page()
-    cursor = conn.cursor()
     binz_results = cursor.fetchall()
     for binz_result in binz_results:
         if st.sidebar.button(binz_result[0], key=binz_result[0]):
             st.session_state["selected_binz"] = binz_result[0]
             switch_to_binz_page()
-
 
 else:
     st.write("Please login to continue")
