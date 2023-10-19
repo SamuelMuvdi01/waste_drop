@@ -86,4 +86,3 @@ if create_user_button:
          st.error(":red[Please enter a valid first name!]")
     if(len(last_name_val) < 2):
          st.error(":red[Please enter a valid last name!]")
-
