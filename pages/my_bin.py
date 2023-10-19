@@ -39,6 +39,7 @@ else:
     cursor.execute("SELECT binz_id FROM public.binz_owners WHERE binz_name = '{}' and user_id = '{}';".format(binz_name, user_id))
 
     binz_uuid = cursor.fetchone()
+    binz_uuid = binz_uuid.replace("('", "").replace("',)", "")
     st.write("This is the uuid", binz_uuid)
     cursor.execute("INSERT INTO public.items(binz_id, quantity, expiry_date) VALUES('{}', '{}', '{}')".format(binz_uuid, count, exp_date))
     cursor.commit()
