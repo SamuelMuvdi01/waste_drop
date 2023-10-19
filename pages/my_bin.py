@@ -49,6 +49,6 @@ else:
             cursor.execute("INSERT INTO public.items(binz_id, quantity, expiry_date, item_name) VALUES('{}', '{}', '{}', '{}')".format(binz_uuid, count, exp_date, binz_item))
             conn.commit()
             st.write(":green[Item Added!]")
-    elif add_binz_item and binz_name == None:
+    elif add_binz_item and len(binz_name) < 2:
         st.error("Binz item must have a name!")
         
