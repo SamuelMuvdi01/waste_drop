@@ -42,7 +42,7 @@ else:
     binz_uuid = binz_uuid[0]
     now = datetime.now().date()  # Convert datetime to date
     
-    if add_binz_item and binz_name != None:
+    if add_binz_item and len(binz_name) >= 2:
         if exp_date < now:
             st.error('Date must be greater than today!')
         else:
