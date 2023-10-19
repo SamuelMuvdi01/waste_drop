@@ -41,6 +41,6 @@ else:
 
 
 
-    cursor.execute("INSERT INTO public.items(binz_id, quantity, expiry_date) VALUES('{}', '{}', '{}')".format(binz_uuid, count, exp_date))
-    cursor.commit()
-    st.write(":green[Item Added!]")
+    #cursor.execute("INSERT INTO public.items(binz_id, quantity, expiry_date) VALUES('{}', '{}', '{}')".format(binz_uuid, count, exp_date))
+    #cursor.commit()
+    #st.write(":green[Item Added!]")
