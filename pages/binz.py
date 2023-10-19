@@ -8,8 +8,12 @@ from extra_streamlit_components import CookieManager
 import psycopg2
 import helperfuncs as hf
 from pages.login import conn
+import time
 
 st.title(st.session_state["selected_binz"])
 
 binz_item = st.text_input("Add an Item to bin: ")
-create_binz_but = st.button("Create")
+exp_date = st.date_input("Please Enter Item Expiration")
+if exp_date <= time.today():
+    st.warning("Item already expired!")
+create_binz_but = st.button("Add Item")
