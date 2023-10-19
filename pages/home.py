@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 from urllib.error import URLError
@@ -23,6 +22,8 @@ def log_out():
     st.session_state['login_status'] = False
     switch_page("sign_up")
 
+def switch_to_binz_page():
+    st.title('Binz')
 
 st.title('WasteDrop')
 
@@ -61,6 +62,8 @@ if(st.session_state["login_status"] == True):
     for binz_result in binz_results:
         if st.sidebar.button(binz_result[0], key=binz_result[0]):
             st.session_state["selected_binz"] = binz_result[0]
-            
+            switch_to_binz_page()
+
 else:
     st.write("Please login to continue")
+
