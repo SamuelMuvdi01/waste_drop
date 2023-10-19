@@ -16,7 +16,7 @@ def log_out():
     switch_page("sign_up")
 
 
-binz_item = st.text_input("Add an Item to" + st.session_state["selected_binz"] + ": ")
+binz_item = st.text_input("Add an Item to bin: ")
 exp_date = st.date_input("Please Enter Item Expiration")
 add_binz_item = st.button("Add Item")
 
