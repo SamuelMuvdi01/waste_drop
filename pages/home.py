@@ -61,8 +61,8 @@ if(st.session_state["login_status"] == True):
     st.header('View all binz')
     cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
     binz_results = cursor.fetchall()
-    for i in user_binz_arr:
-         st.sidebar.button(binz_results)
+    for binz_result in binz_results:
+        st.sidebar.button(binz_result[0])
 
 
 
