@@ -37,10 +37,12 @@ else:
     add_binz_item = st.button("Add Item")
     binz_name = st.session_state["selected_binz"]
     cursor.execute("SELECT binz_id FROM public.binz_owners WHERE binz_name = '{}' and user_id = '{}';".format(binz_name, user_id))
-
     binz_uuid = cursor.fetchone()
     binz_uuid = binz_uuid[0]
     st.write("This is the uuid", binz_uuid)
-    cursor.execute("INSERT INTO public.items(binz_id, quantity, expiry_date) VALUES('{}', '{}', '{}')".format(binz_uuid, count, exp_date))
-    conn.commit()
-    st.write(":green[Item Added!]")
+    
+    if add_binz_item:
+        st.write(exp_date)
+        cursor.execute("INSERT INTO public.items(binz_id, quantity, expiry_date, item_name) VALUES('{}', '{}', '{}', '{}')".format(binz_uuid, count, exp_date, binz_item))
+        conn.commit()
+        st.write(":green[Item Added!]")
