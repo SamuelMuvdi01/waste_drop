@@ -10,3 +10,6 @@ import helperfuncs as hf
 from pages.login import conn
 
 st.title(st.session_state["selected_binz"])
+
+binz_item = st.text_input("Add an Item to bin: ")
+create_binz_but = st.button("Create")
