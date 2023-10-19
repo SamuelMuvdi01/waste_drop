@@ -9,6 +9,7 @@ import psycopg2
 import helperfuncs as hf
 from pages.login import conn
 import pages.home as hm
+import time
 
 if "login_status" not in st.session_state:
     st.session_state['login_status'] = False
@@ -35,6 +36,7 @@ else:
     count = st.number_input("Please Enter Item Quantity: ", step=1, min_value=1)
     add_binz_item = st.button("Add Item")
     binz_name = st.session_state["selected_binz"]
+    time.sleep(3)
     cursor.execute("SELECT binz_id FROM public.binz_owners WHERE binz_name = '{}' and user_id = '{}';").format(binz_name, user_id)
     binz_uuid = cursor.fetchone()
 
