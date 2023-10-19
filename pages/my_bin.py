@@ -12,6 +12,9 @@ from pages.home import conn
 if "login_status" not in st.session_state:
     st.session_state['login_status'] = False
 
+if "saved_user_id" not in st.session_state:
+    st.session_state["saved_user_id"] = ""
+
 if(st.session_state["login_status"] == False):
     st.write('PLEASE LOG IN!')
 else:
@@ -19,8 +22,7 @@ else:
 
     st.title(st.session_state["selected_binz"])
 
-    if "saved_user_id" not in st.session_state:
-        st.session_state["saved_user_id"] = ""
+   
     cursor = conn.cursor()
 
     def log_out():
