@@ -52,12 +52,12 @@ if(st.session_state["login_status"] == True):
             user_binz_arr.append(elem2)
 
     if create_binz_but:
-                if(binz_name in user_binz_arr):
-                    st.error(":red[This binz already exists!]")
-                else:
-                    cursor.execute("INSERT INTO public.binz_owners(binz_name, user_id) VALUES('{}', '{}')".format(binz_name, user_id))
-                    conn.commit()
-                    st.write(":green[Binz created!]")
+        if(binz_name in user_binz_arr):
+            st.error(":red[This binz already exists!]")
+        else:
+            cursor.execute("INSERT INTO public.binz_owners(binz_name, user_id) VALUES('{}', '{}')".format(binz_name, user_id))
+            conn.commit()
+            st.write(":green[Binz created!]")
 
     cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
     binz_results = cursor.fetchall()
