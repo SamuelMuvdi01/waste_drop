@@ -14,6 +14,4 @@ st.title(st.session_state["selected_binz"])
 
 binz_item = st.text_input("Add an Item to bin: ")
 exp_date = st.date_input("Please Enter Item Expiration")
-if exp_date <= time.today():
-    st.warning("Item already expired!")
 create_binz_but = st.button("Add Item")
