@@ -16,8 +16,8 @@ def log_out():
     switch_page("sign_up")
 
 binz_item = st.text_input("Add an Item to bin: ")
-exp_date = st.date_input("Please Enter Item Expiration")
-count = st.number_input("Please Enter Item Quantity", step=1)
+exp_date = st.date_input("Please Enter Item Expiration: ")
+count = st.number_input("Please Enter Item Quantity: ", step=1)
 add_binz_item = st.button("Add Item")
 
 logout_button = st.sidebar.button("Log Off", on_click=log_out)
