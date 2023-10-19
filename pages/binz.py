@@ -21,4 +21,3 @@ exp_date = st.date_input("Please Enter Item Expiration")
 add_binz_item = st.button("Add Item")
 
 logout_button = st.sidebar.button("Log Off", on_click=log_out)
-back_button = st.sidebar.button("Back", on_click=back)
