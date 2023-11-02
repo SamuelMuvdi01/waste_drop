@@ -23,17 +23,31 @@ if "selected_binz" not in st.session_state:
 
 if(st.session_state["login_status"] == False):
     st.write('PLEASE LOG IN!')
+
+if "binz_view_status" not in st.session_state:
+    st.session_state['binz_view_status'] = "add"
 else:
 
     cursor = conn.cursor()
 
     st.title(st.session_state["selected_binz"])
 
+    def add_frame_func():
+        st.session_state['binz_view_status'] = "add"
+
+    def updt_frame_func():
+        st.session_state['binz_view_status'] = "updt"
+        
+    def del_frame_func():
+        st.session_state['binz_view_status'] = "del"
+
     user_id = st.session_state["saved_user_id"]
     user_id = user_id.replace("'", "").replace("[", "").replace("]", "")
-    add_frame = st.button("add items")
-    delete_frame = st.button("delete items")
-    update_frame = st.button("update items")
+    add_frame = st.button("add items", on_click = add_frame_func)
+    delete_frame = st.button("delete items", on_click= del_frame_func)
+    update_frame = st.button("update items", on_click = updt_frame_func)
+
+    
 
 
     binz_name = st.session_state["selected_binz"]
@@ -42,7 +56,7 @@ else:
     binz_uuid = binz_uuid[0]
 
 
-    if add_frame:
+    if st.session_state['binz_view_status'] == "add":
         binz_item = st.text_input("Add an Item to bin: ")
         exp_date = st.date_input("Please Enter Item Expiration: ")
         count = st.number_input("Please Enter Item Quantity: ", step=1, min_value=1)
@@ -58,7 +72,7 @@ else:
         elif add_binz_item and len(binz_item) < 2:
             st.error("Binz item must have a name!")
 
-    if update_frame:
+    if st.session_state['binz_view_status'] == "updt":
         item_name_updt = st.text_input("Enter name of item you wish to update")
         updt_quantity = st.number_input("Please Enter Item Quantity: ", step=1, min_value=1)
         updt_button = st.button("update item")
@@ -67,7 +81,7 @@ else:
             conn.commit()
             st.write(":green[Quantity Updated!]")
 
-    if delete_frame:
+    if st.session_state['binz_view_status'] == "del":
         pass
     
     cursor.execute("SELECT item_name, quantity, timestamp, expiry_date FROM public.items WHERE binz_id= '{}';".format(binz_uuid))
