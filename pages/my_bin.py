@@ -55,5 +55,5 @@ else:
     cursor.execute("SELECT item_name, quantity, timestamp, expiry_date FROM public.items WHERE binz_id= '{}';".format(binz_uuid))
     items_results = cursor.fetchall()
     item_results_frame = pd.DataFrame(items_results, columns = ['item_name', 'quantity', 'added_on_date', 'expiry_date'])
-    item_results_frame = st.dataframe(item_results_frame)
-    st.write(item_results_frame)
+    st_df_results = st.dataframe(item_results_frame, use_container_width=True)
+    st_df_results
