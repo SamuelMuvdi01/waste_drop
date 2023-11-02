@@ -51,4 +51,7 @@ else:
             st.write(":green[Item Added!]")
     elif add_binz_item and len(binz_item) < 2:
         st.error("Binz item must have a name!")
-        
+    
+    cursor.execute("SELECT item_name, quantity, timestamp, expiry_date FROM public.items WHERE binz_id= '{}';".format(binz_uuid))
+    items_results = cursor.fetchall()
+    st.write(items_results)
