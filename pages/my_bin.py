@@ -29,29 +29,30 @@ else:
 
     st.title(st.session_state["selected_binz"])
 
+    if "crud_status" not in st.session_state:
+        st.session_state["crud_status"] = ""
+
     user_id = st.session_state["saved_user_id"]
     user_id = user_id.replace("'", "").replace("[", "").replace("]", "")
     binz_name = st.session_state["selected_binz"]
     cursor.execute("SELECT binz_id FROM public.binz_owners WHERE binz_name = '{}' and user_id = '{}';".format(binz_name, user_id))
     binz_uuid = cursor.fetchone()
     binz_uuid = binz_uuid[0]
-
-    crud_status = 'add'
-        
     col1, col2, col3, col4 = st.columns(4)
     with col1:
         add_status_btn = st.button("add items")
         if add_status_btn:
-            crud_status = 'add'
+            st.session_state["crud_status"] = "add"
     with col2:
         updt_status_btn = st.button("update items")
         if updt_status_btn:
-                crud_status = 'updt'
+                st.session_state["crud_status"] = "updt"
     with col3:
         delete_status_btn = st.button("delete items")    
         if delete_status_btn:
-            crud_status = 'del'
-    if crud_status == 'add':
+            st.session_state["crud_status"] = "del"
+
+    if st.session_state["crud_status"] == 'add':
         binz_item = st.text_input("Add an Item to bin: ")
         exp_date = st.date_input("Please Enter Item Expiration: ")
         count = st.number_input("Please Enter Item Quantity: ", step=1, min_value=1)
@@ -68,7 +69,7 @@ else:
         elif add_binz_item and len(binz_item) < 2:
             st.error("Binz item must have a name!")
     
-    elif crud_status == 'updt':
+    elif st.session_state["crud_status"] == 'updt':
         item_name_updt = st.text_input("Enter name of item you wish to update")
         updt_quantity = st.number_input("Please Enter Item Quantity: ", step=1, min_value=1)
         updt_button = st.button("update item")
@@ -81,4 +82,3 @@ else:
     item_results_frame = pd.DataFrame(items_results, columns = ['item_name', 'quantity', 'added_on_date', 'expiry_date'])
   
     st.data_editor(item_results_frame, use_container_width=True, hide_index=True, disabled=True)
-    st.write("crud_status", crud_status)
