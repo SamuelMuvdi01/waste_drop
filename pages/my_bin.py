@@ -81,3 +81,4 @@ else:
     item_results_frame = pd.DataFrame(items_results, columns = ['item_name', 'quantity', 'added_on_date', 'expiry_date'])
   
     st.data_editor(item_results_frame, use_container_width=True, hide_index=True, disabled=True)
+    st.write("crud_status", crud_status)
