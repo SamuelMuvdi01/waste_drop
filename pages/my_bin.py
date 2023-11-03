@@ -37,20 +37,20 @@ else:
     binz_uuid = binz_uuid[0]
 
     crud_status = 'add'
-
-    def make_status_add():
-        crud_status = 'add'
-    
-    def make_status_updt():
-        crud_status = 'updt'
-
-    def make_status_del():
-        crud_status = 'del'
+        
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        add_status_btn = st.button("add items", on_click=make_status_add)
-        updt_status_btn = st.button("update items", on_click=make_status_updt)
-        delete_status_btn = st.button("delete items", on_click=make_status_del)    
+        add_status_btn = st.button("add items")
+        if add_status_btn:
+            crud_status = 'add'
+    with col2:
+        updt_status_btn = st.button("update items")
+        if updt_status_btn:
+                crud_status = 'updt'
+    with col3:
+        delete_status_btn = st.button("delete items")    
+        if delete_status_btn:
+            crud_status = 'del'
     if crud_status == 'add':
         binz_item = st.text_input("Add an Item to bin: ")
         exp_date = st.date_input("Please Enter Item Expiration: ")
