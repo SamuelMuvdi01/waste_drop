@@ -77,7 +77,7 @@ else:
             cursor.execute("UPDATE public.items SET quantity = '{}' WHERE item_name = '{}' and binz_id = '{}';".format(updt_quantity, item_name_updt, binz_uuid))
             st.write(":green[Item updated!]")
     
-    elif st.session_state["crud_status"] == 'updt':
+    elif st.session_state["crud_status"] == 'del':
         item_name_del = st.text_input("Enter name of item you wish to delete")
         del_button = st.button("delete item")
         if del_button:
