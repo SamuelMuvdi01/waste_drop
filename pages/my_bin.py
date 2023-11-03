@@ -77,6 +77,14 @@ else:
             cursor.execute("UPDATE public.items SET quantity = '{}' WHERE item_name = '{}' and binz_id = '{}';".format(updt_quantity, item_name_updt, binz_uuid))
             st.write(":green[Item updated!]")
     
+    elif st.session_state["crud_status"] == 'updt':
+        item_name_del = st.text_input("Enter name of item you wish to delete")
+        del_button = st.button("delete item")
+        if del_button:
+            cursor.execute("DELETE FROM public.items WHERE item_name = '{}' and binz_id = '{}';".format(item_name_del, binz_uuid))
+            conn.commit()
+            st.write(":green[Item Deleted!]")
+
     cursor.execute("SELECT item_name, quantity, timestamp, expiry_date FROM public.items WHERE binz_id= '{}';".format(binz_uuid))
     items_results = cursor.fetchall()
     item_results_frame = pd.DataFrame(items_results, columns = ['item_name', 'quantity', 'added_on_date', 'expiry_date'])
