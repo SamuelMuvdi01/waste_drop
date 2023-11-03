@@ -21,11 +21,11 @@ if "saved_user_id" not in st.session_state:
 if "selected_binz" not in st.session_state:
     st.session_state["selected_binz"] = ""
 
-if "binz_view_status" not in st.session_state:
-    st.session_state['binz_view_status'] = "add"
-
 if(st.session_state["login_status"] == False):
     st.write('PLEASE LOG IN!')
+
+if "binz_view_status" not in st.session_state:
+    st.session_state['binz_view_status'] = "add"
 else:
 
     cursor = conn.cursor()
