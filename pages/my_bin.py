@@ -38,6 +38,19 @@ else:
 
     crud_status = 'add'
 
+    def make_status_add():
+        crud_status = 'add'
+    
+    def make_status_updt():
+        crud_status = 'updt'
+
+    def make_status_del():
+        crud_status = 'del'
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        add_status_btn = st.button("add items", on_click=make_status_add)
+        updt_status_btn = st.button("update items", on_click=make_status_updt)
+        delete_status_btn = st.button("delete items", on_click=make_status_del)    
     if crud_status == 'add':
         binz_item = st.text_input("Add an Item to bin: ")
         exp_date = st.date_input("Please Enter Item Expiration: ")
@@ -62,8 +75,6 @@ else:
         if updt_button:
             cursor.execute("UPDATE public.items SET quantity = '{}' WHERE item_name = '{}' and binz_id = '{}';".format(updt_quantity, item_name_updt, binz_uuid))
             st.write(":green[Item updated!]")
-
-
     
     cursor.execute("SELECT item_name, quantity, timestamp, expiry_date FROM public.items WHERE binz_id= '{}';".format(binz_uuid))
     items_results = cursor.fetchall()
