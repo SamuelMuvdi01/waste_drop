@@ -77,9 +77,9 @@ else:
         updt_quantity = st.number_input("Please Enter Item Quantity: ", step=1, min_value=1)
         updt_button = st.button("update item")
         if updt_button:
-           # cursor.execute("UPDATE public.items SET quantity = '{}' WHERE item_name = '{}' and binz_id = '{}';".format(updt_quantity, item_name_updt, binz_uuid))
-           # conn.commit()
-           # st.write(":green[Quantity Updated!]")
+            cursor.execute("UPDATE public.items SET quantity = '{}' WHERE item_name = '{}' and binz_id = '{}';".format(updt_quantity, item_name_updt, binz_uuid))
+            conn.commit()
+            st.write(":green[Quantity Updated!]")
 
     if st.session_state['binz_view_status'] == "del":
         pass
