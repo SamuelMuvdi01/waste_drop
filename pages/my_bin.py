@@ -31,44 +31,26 @@ else:
 
     user_id = st.session_state["saved_user_id"]
     user_id = user_id.replace("'", "").replace("[", "").replace("]", "")
-    add_frame = st.button("add items")
-    delete_frame = st.button("delete items")
-    update_frame = st.button("update items")
 
-
+    binz_item = st.text_input("Add an Item to bin: ")
+    exp_date = st.date_input("Please Enter Item Expiration: ")
+    count = st.number_input("Please Enter Item Quantity: ", step=1, min_value=1)
+    add_binz_item = st.button("Add Item")
     binz_name = st.session_state["selected_binz"]
     cursor.execute("SELECT binz_id FROM public.binz_owners WHERE binz_name = '{}' and user_id = '{}';".format(binz_name, user_id))
     binz_uuid = cursor.fetchone()
     binz_uuid = binz_uuid[0]
-
-
-    if add_frame:
-        binz_item = st.text_input("Add an Item to bin: ")
-        exp_date = st.date_input("Please Enter Item Expiration: ")
-        count = st.number_input("Please Enter Item Quantity: ", step=1, min_value=1)
-        add_binz_item = st.button("Add Item")
-        now = datetime.now().date()  # Convert datetime to date
-        if add_binz_item and len(binz_item) >= 2:
-            if exp_date < now:
-                st.error('Date must be greater than today!')
-            else:
-                cursor.execute("INSERT INTO public.items(binz_id, quantity, expiry_date, item_name) VALUES('{}', '{}', '{}', '{}')".format(binz_uuid, count, exp_date, binz_item))
-                conn.commit()
-                st.write(":green[Item Added!]")
-        elif add_binz_item and len(binz_item) < 2:
-            st.error("Binz item must have a name!")
-
-    if update_frame:
-        item_name_updt = st.text_input("Enter name of item you wish to update")
-        updt_quantity = st.number_input("Please Enter Item Quantity: ", step=1, min_value=1)
-        updt_button = st.button("update item")
-        if updt_button:
-            cursor.execute("UPDATE public.items SET quantity = '{}' WHERE item_name = '{}' and binz_uid = '{}';".format(updt_quantity, binz_uuid))
+    now = datetime.now().date()  # Convert datetime to date
+    
+    if add_binz_item and len(binz_item) >= 2:
+        if exp_date < now:
+            st.error('Date must be greater than today!')
+        else:
+            cursor.execute("INSERT INTO public.items(binz_id, quantity, expiry_date, item_name) VALUES('{}', '{}', '{}', '{}')".format(binz_uuid, count, exp_date, binz_item))
             conn.commit()
-            st.write(":green[Quantity Updated!]")
-
-    if delete_frame:
-        pass
+            st.write(":green[Item Added!]")
+    elif add_binz_item and len(binz_item) < 2:
+        st.error("Binz item must have a name!")
     
     cursor.execute("SELECT item_name, quantity, timestamp, expiry_date FROM public.items WHERE binz_id= '{}';".format(binz_uuid))
     items_results = cursor.fetchall()
