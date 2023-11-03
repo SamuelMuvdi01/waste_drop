@@ -18,6 +18,9 @@ if "saved_user_id" not in st.session_state:
 if "login_status" not in st.session_state:
     st.session_state['login_status'] = False
 
+if "selected_binz" not in st.session_state:
+    st.session_state["selected_binz"] = ''
+
 def log_out():
     st.session_state['login_status'] = False
     switch_page("sign_up")

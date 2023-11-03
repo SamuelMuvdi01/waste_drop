@@ -22,15 +22,11 @@ if "selected_binz" not in st.session_state:
     st.session_state["selected_binz"] = ""
 
 if "binz_view_status" not in st.session_state:
-    st.session_state['binz_view_status'] = "add"
+    st.session_state['binz_view_status'] = "add"\
 
-if(st.session_state["login_status"] == False):
-    st.write('PLEASE LOG IN!')
-else:
+if "selected_binz" not in st.session_state:
+    st.session_state["selected_binz"] = ''
 
-    cursor = conn.cursor()
-
-    st.title(st.session_state["selected_binz"])
 
     def add_frame_func():
         st.session_state['binz_view_status'] = "add"
@@ -40,6 +36,16 @@ else:
         
     def del_frame_func():
         st.session_state['binz_view_status'] = "del"
+
+if(st.session_state["login_status"] == False):
+    st.write('PLEASE LOG IN!')
+elif(st.session_state['selected_binz'] == ''):
+    st.write('PLEASE SELECT A BIN!')
+else:
+
+    cursor = conn.cursor()
+
+    st.title(st.session_state["selected_binz"])
 
     user_id = st.session_state["saved_user_id"]
     user_id = user_id.replace("'", "").replace("[", "").replace("]", "")
