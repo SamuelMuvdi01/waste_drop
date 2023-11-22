@@ -99,6 +99,6 @@ if st.session_state["login_status"] == True:
             switch_to_binz_page()
 
 else:
-    st.write("Please login to continue")
+    st.write("Please ", st.button("Login"), "or", st.button("Sign up"), "to continue")
     if(st.button("Login")):
         switch_page("login")
