@@ -8,7 +8,6 @@ import helperfuncs as hf
 import hashlib
 
 st.set_page_config(page_title="Sign_Up")
-st.title("Welcome, please sign up below")
 
 @st.cache_resource
 def init_connection():
@@ -42,6 +41,7 @@ if st.session_state["login_status"] == True:
     logout_button = st.sidebar.button("Log Off", on_click=log_out)
 
 else:
+    st.title("Welcome, please sign up below")
     first_name_val = st.text_input("Please enter first name", placeholder="John", key="first_name")
     last_name_val = st.text_input("Please enter last name", placeholder="Doe", key="last_name")
     email_val = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com", key="email")
