@@ -33,8 +33,6 @@ def rename_bin(old_bin_name, new_bin_name, user_id):
     conn.commit()
     st.success(f":green[Binz '{old_bin_name}' renamed to '{new_bin_name}']")
 
-image_path = "/WD.jpg"
-
 st.title('WasteDrop')
 
 if st.session_state["login_status"] == True:
@@ -101,7 +99,6 @@ if st.session_state["login_status"] == True:
             switch_to_binz_page()
 
 else:
-    st.image(image_path, caption='Your Image Caption', use_column_width=True)
     st.write("Please Login or Sign up to continue:")
     if(st.button("Login")):
         switch_page("login")
