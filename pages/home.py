@@ -72,7 +72,7 @@ if(st.session_state["login_status"] == True):
             st.session_state["selected_binz"] = binz_result[0]
             switch_to_binz_page()
 
-        delete_bin_button = st.sidebar.button(f"Delete {binz_name}", key=f"delete_{binz_name}, help=f'<style>div.row-widget.stButton > div{binz_name} {{background-color: #FF0000;}}</style>'")
+        delete_bin_button = st.sidebar.button(f"Delete {binz_name}", key=f"delete_{binz_name}", help=f'<style>div.row-widget.stButton > div{binz_name} {{background-color: #FF0000;}}</style>')
         if delete_bin_button:
             delete_bin(binz_name, user_id)
             st.session_state["selected_binz"] = ""
