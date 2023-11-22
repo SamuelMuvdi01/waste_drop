@@ -1,12 +1,8 @@
 import streamlit as st
 import pandas as pd
-from urllib.error import URLError
-from streamlit.source_util import _on_pages_changed, get_pages
-from streamlit_extras.switch_page_button import switch_page
-import sys
-from extra_streamlit_components import CookieManager
 import psycopg2
-import helperfuncs as hf
+from streamlit_extras.switch_page_button import switch_page
+from extra_streamlit_components import CookieManager
 from pages.login import conn
 
 if "saved_user_name" not in st.session_state:
@@ -33,49 +29,54 @@ def delete_bin(binz_name, user_id):
 
 st.title('WasteDrop')
 
-
-if(st.session_state["login_status"] == True):
-
+if st.session_state["login_status"] == True:
     cursor = conn.cursor()
     
     users_name = st.session_state["saved_user_name"]
     users_name = users_name.replace("'", "").replace("[","").replace("]","")
-    st.write("Welcome! ",users_name)
+    st.write("Welcome! ", users_name)
     logout_button = st.sidebar.button("Log Off", on_click=log_out)
     st.sidebar.title("Binz")
     user_id = st.session_state["saved_user_id"]
     user_id = user_id.replace("'", "").replace("[", "").replace("]", "")
     st.header("Create new Binz below")
-    binz_name = st.text_input("Enter the name of binz to create")
+    
+    # Bin Creation
+    binz_name_to_create = st.text_input("Enter the name of binz to create")
     create_binz_but = st.button("Create")
+    
     cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
     user_binz_list = cursor.fetchall()
-    user_binz_arr = []
-    for elem1 in user_binz_list:
-        for elem2 in elem1:
-            user_binz_arr.append(elem2)
+    user_binz_arr = [elem2 for elem1 in user_binz_list for elem2 in elem1]
 
     if create_binz_but:
-        if(binz_name in user_binz_arr):
+        if binz_name_to_create in user_binz_arr:
             st.error(":red[This binz already exists!]")
         else:
-            cursor.execute("INSERT INTO public.binz_owners(binz_name, user_id) VALUES('{}', '{}')".format(binz_name, user_id))
+            cursor.execute("INSERT INTO public.binz_owners(binz_name, user_id) VALUES('{}', '{}')".format(binz_name_to_create, user_id))
             conn.commit()
             st.write(":green[Binz created!]")
 
-    cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
-    binz_results = cursor.fetchall()
-    for binz_result in binz_results:
+    # Bin Deletion
+    st.header("Delete Binz below")
+    binz_name_to_delete = st.text_input("Enter the name of binz to delete")
+    delete_binz_but = st.button("Delete")
+
+    if delete_binz_but:
+        if binz_name_to_delete not in user_binz_arr:
+            st.error(":red[This binz does not exist!]")
+        else:
+            delete_bin(binz_name_to_delete, user_id)
+            st.session_state["selected_binz"] = ""
+
+    # Display User's Bins
+    st.sidebar.title("Your Bins")
+    for binz_result in user_binz_list:
         binz_name = binz_result[0]
 
-        if st.sidebar.button(binz_result[0], key=binz_result[0]):
-            st.session_state["selected_binz"] = binz_result[0]
+        if st.sidebar.button(binz_name, key=binz_name):
+            st.session_state["selected_binz"] = binz_name
             switch_to_binz_page()
-
-        delete_bin_button = st.sidebar.button(f"Delete {binz_name}", key=f"delete_{binz_name}", help=f'<style>div.row-widget.stButton > div{binz_name} {{background-color: #FF0000;}}</style>')
-        if delete_bin_button:
-            delete_bin(binz_name, user_id)
-            st.session_state["selected_binz"] = ""
 
 else:
     st.write("Please login to continue")
