@@ -29,6 +29,11 @@ else:
 
     st.title(st.session_state["selected_binz"])
 
+    return_home_btn = st.button("Return to Home")
+
+    if return_home_btn:
+        switch_page("home")
+
     if "crud_status" not in st.session_state:
         st.session_state["crud_status"] = ""
 
