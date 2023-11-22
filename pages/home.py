@@ -100,3 +100,5 @@ if st.session_state["login_status"] == True:
 
 else:
     st.write("Please login to continue")
+    if(st.button("Login")):
+        switch_page("login")
