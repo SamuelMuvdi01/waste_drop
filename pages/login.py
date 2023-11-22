@@ -33,6 +33,9 @@ def logged_in():
 if st.session_state["login_status"] == True:
      st.write("Successfully Logged In!")
      logout_button = st.sidebar.button("Log Off", on_click=log_out)
+     return_home_btn = st.button("Return to Home")
+     if return_home_btn:
+        switch_page("home")
 
 else:
     st.title("Welcome, please log in below")

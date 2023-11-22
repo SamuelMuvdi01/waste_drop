@@ -37,8 +37,11 @@ if "password" not in st.session_state:
     st.session_state['password'] = ""
 
 if st.session_state["login_status"] == True:
-    st.write("Please Log out to create a new account!")
+    st.write("Please Log Out To Create a New Account!")
     logout_button = st.sidebar.button("Log Off", on_click=log_out)
+    return_home_btn = st.button("Return to Home")
+    if return_home_btn:
+        switch_page("home")
 
 else:
     st.title("Welcome, please sign up below")
