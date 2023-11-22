@@ -42,7 +42,7 @@ col1, col2, col3, col4 = st.columns(4)
 with col1:
      create_user_button = st.button("Create account", key="create_user_button")
 with col3:
-    if(st.button("Already have an account?")):
+    if(st.button("Login")):
      switch_page("login")
 
 with col2:
