@@ -25,6 +25,12 @@ def log_out():
 def switch_to_binz_page():
     switch_page("my_bin")
 
+def delete_bin(binz_name, user_id):
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM public.binz_owners WHERE binz_name = '{}' AND user_id = '{}';".format(binz_name, user_id))
+    conn.commit()
+    st.success(f":green[Binz '{binz_name}' deleted!]")
+
 st.title('WasteDrop')
 
 
@@ -60,6 +66,13 @@ if(st.session_state["login_status"] == True):
     cursor.execute("SELECT binz_name FROM public.binz_owners WHERE user_id = '{}';".format(user_id))
     binz_results = cursor.fetchall()
     for binz_result in binz_results:
+        binz_name = binz_result[0]
+        delete_bin_button = st.sidebar.button(f"Delete {binz_name}", key=f"delete_{binz_name}")
+        
+        if delete_bin_button:
+            delete_bin(binz_name, user_id)
+            st.session_state["selected_binz"] = ""
+
         if st.sidebar.button(binz_result[0], key=binz_result[0]):
             st.session_state["selected_binz"] = binz_result[0]
             switch_to_binz_page()
