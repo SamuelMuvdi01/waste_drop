@@ -42,7 +42,6 @@ if st.session_state["login_status"] == True:
     users_name = users_name.replace("'", "").replace("[","").replace("]","")
     st.write("Welcome! ", users_name)
     logout_button = st.sidebar.button("Log Off", on_click=log_out)
-    st.sidebar.title("Binz")
     user_id = st.session_state["saved_user_id"]
     user_id = user_id.replace("'", "").replace("[", "").replace("]", "")
     
@@ -91,7 +90,7 @@ if st.session_state["login_status"] == True:
             st.session_state["selected_binz"] = ""
 
     # Display User's Bins
-    st.sidebar.title("Your Bins")
+    st.sidebar.title("Your Binz")
     for binz_result in user_binz_list:
         binz_name = binz_result[0]
 
