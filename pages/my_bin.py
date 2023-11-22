@@ -52,21 +52,6 @@ else:
         if delete_status_btn:
             st.session_state["crud_status"] = "del"
 
-    st.header("Delete Bin")
-    delete_bin_btn = st.button("Delete Selected Bin")
-    if delete_bin_btn:
-        confirm_delete = st.checkbox("I confirm that I want to delete the selected bin.")
-        if confirm_delete:
-            # Delete the bin and associated items
-            cursor.execute("DELETE FROM public.items WHERE binz_id = '{}';".format(binz_uuid))
-            cursor.execute("DELETE FROM public.binz_owners WHERE binz_id = '{}';".format(binz_uuid))
-            conn.commit()
-
-            # Clear session state and display success message
-            st.session_state["selected_binz"] = ""
-            st.session_state["crud_status"] = ""
-            st.success("Selected bin deleted successfully!")
-
     if st.session_state["crud_status"] == 'add':
         binz_item = st.text_input("Add an Item to bin: ")
         exp_date = st.date_input("Please Enter Item Expiration: ")
