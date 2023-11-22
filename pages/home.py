@@ -25,7 +25,7 @@ def delete_bin(binz_name, user_id):
     cursor = conn.cursor()
     cursor.execute("DELETE FROM public.binz_owners WHERE binz_name = '{}' AND user_id = '{}';".format(binz_name, user_id))
     conn.commit()
-    st.success(f":green[Binz '{binz_name}' deleted!]")
+    st.success(f":red['{binz_name}' successfully deleted!]")
 
 def rename_bin(old_bin_name, new_bin_name, user_id):
     cursor = conn.cursor()

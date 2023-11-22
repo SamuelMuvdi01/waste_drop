@@ -10,9 +10,6 @@ import hashlib
 st.set_page_config(page_title="Sign_Up")
 st.title("Welcome, please sign up below")
 
-
-
-
 @st.cache_resource
 def init_connection():
     return psycopg2.connect(**st.secrets["postgres"])
@@ -36,9 +33,6 @@ if "email" not in st.session_state:
 if "password" not in st.session_state:
     st.session_state['password'] = ""
 
-
-
-
 first_name_val = st.text_input("Please enter first name", placeholder="John", key="first_name")
 last_name_val = st.text_input("Please enter last name", placeholder="Doe", key="last_name")
 email_val = st.text_input("Please enter email", placeholder="JohnDoe@gmail.com", key="email")
@@ -48,7 +42,7 @@ col1, col2, col3, col4 = st.columns(4)
 with col1:
      create_user_button = st.button("Create account", key="create_user_button")
 with col3:
-    if(st.button("login")):
+    if(st.button("Already have an account?")):
      switch_page("login")
 
 with col2:
