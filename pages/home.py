@@ -33,7 +33,7 @@ def rename_bin(old_bin_name, new_bin_name, user_id):
     conn.commit()
     st.success(f":green[Binz '{old_bin_name}' renamed to '{new_bin_name}']")
 
-image_path = "WD.jpg"
+image_path = "/WD.jpg"
 
 st.title('WasteDrop')
 
