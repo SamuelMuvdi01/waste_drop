@@ -67,15 +67,15 @@ if(st.session_state["login_status"] == True):
     binz_results = cursor.fetchall()
     for binz_result in binz_results:
         binz_name = binz_result[0]
-        delete_bin_button = st.sidebar.button(f"Delete {binz_name}", key=f"delete_{binz_name}")
-        
-        if delete_bin_button:
-            delete_bin(binz_name, user_id)
-            st.session_state["selected_binz"] = ""
 
         if st.sidebar.button(binz_result[0], key=binz_result[0]):
             st.session_state["selected_binz"] = binz_result[0]
             switch_to_binz_page()
+
+        delete_bin_button = st.sidebar.button(f"Delete {binz_name}", key=f"delete_{binz_name}")
+        if delete_bin_button:
+            delete_bin(binz_name, user_id)
+            st.session_state["selected_binz"] = ""
 
 else:
     st.write("Please login to continue")
