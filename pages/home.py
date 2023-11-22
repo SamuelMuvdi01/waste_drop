@@ -101,7 +101,6 @@ if st.session_state["login_status"] == True:
             switch_to_binz_page()
 
 else:
-    st.write("Welcome to WasteDrop!")
     st.write("Please Login or Sign up to continue:")
     if(st.button("Login")):
         switch_page("login")
