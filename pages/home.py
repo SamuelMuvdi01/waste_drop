@@ -27,6 +27,12 @@ def delete_bin(binz_name, user_id):
     conn.commit()
     st.success(f":green[Binz '{binz_name}' deleted!]")
 
+def rename_bin(old_bin_name, new_bin_name, user_id):
+    cursor = conn.cursor()
+    cursor.execute("UPDATE public.binz_owners SET binz_name = '{}' WHERE binz_name = '{}' AND user_id = '{}';".format(new_bin_name, old_bin_name, user_id))
+    conn.commit()
+    st.success(f":green[Binz '{old_bin_name}' renamed to '{new_bin_name}']")
+
 st.title('WasteDrop')
 
 if st.session_state["login_status"] == True:
@@ -39,9 +45,9 @@ if st.session_state["login_status"] == True:
     st.sidebar.title("Binz")
     user_id = st.session_state["saved_user_id"]
     user_id = user_id.replace("'", "").replace("[", "").replace("]", "")
-    st.header("Create new Binz below")
     
     # Bin Creation
+    st.header("Create new Binz below")
     binz_name_to_create = st.text_input("Enter the name of binz to create")
     create_binz_but = st.button("Create")
     
@@ -56,6 +62,21 @@ if st.session_state["login_status"] == True:
             cursor.execute("INSERT INTO public.binz_owners(binz_name, user_id) VALUES('{}', '{}')".format(binz_name_to_create, user_id))
             conn.commit()
             st.write(":green[Binz created!]")
+
+    # Bin Renaming
+    st.header("Rename Binz below")
+    old_bin_name_to_rename = st.text_input("Enter the current name of binz")
+    new_bin_name_to_rename = st.text_input("Enter the new name of binz")
+    rename_bin_but = st.button("Rename")
+
+    if rename_bin_but:
+        if old_bin_name_to_rename not in user_binz_arr:
+            st.error(":red[This binz does not exist!]")
+        elif new_bin_name_to_rename in user_binz_arr:
+            st.error(":red[The new binz name is already taken!]")
+        else:
+            rename_bin(old_bin_name_to_rename, new_bin_name_to_rename, user_id)
+            st.session_state["selected_binz"] = ""
 
     # Bin Deletion
     st.header("Delete Binz below")
