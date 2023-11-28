@@ -36,7 +36,7 @@ if "email" not in st.session_state:
 if "password" not in st.session_state:
     st.session_state['password'] = ""
 if "login_status" not in st.session_state:
-    st.session_state['login_status'] == False
+    st.session_state['login_status'] = False
 
 if st.session_state["login_status"] == True:
     st.write("Please Log Out To Create a New Account!")
