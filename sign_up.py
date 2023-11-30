@@ -26,6 +26,7 @@ def clear_inputs():
 def log_out():
     st.session_state['login_status'] = False
     switch_page("sign_up")
+    st.experimental_rerun()
 
 if "first_name" not in st.session_state:
     st.session_state['first_name'] = ""
