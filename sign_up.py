@@ -24,12 +24,9 @@ def clear_inputs():
     st.session_state['password'] = ""
 
 def log_out():
-    try:
-        st.session_state['login_status'] = False
-        switch_page("sign_up")
-        st.experimental_rerun()
-    except st.StreamlitAPIException as e:
-        pass
+    st.session_state['login_status'] = False
+    switch_page("sign_up")
+    
 
 if "first_name" not in st.session_state:
     st.session_state['first_name'] = ""

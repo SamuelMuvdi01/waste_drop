@@ -18,12 +18,8 @@ if "login_status" not in st.session_state:
     st.session_state['login_status'] = False
 
 def log_out():
-    try:
-        st.session_state['login_status'] = False
-        switch_page("sign_up")
-        st.experimental_rerun()
-    except st.StreamlitAPIException as e:
-        pass
+    st.session_state['login_status'] = False
+    switch_page("sign_up")
     
 
 @st.cache_resource
