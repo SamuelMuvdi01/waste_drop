@@ -3,7 +3,7 @@ import pandas as pd
 import psycopg2
 from streamlit_extras.switch_page_button import switch_page
 from extra_streamlit_components import CookieManager
-from .login import conn
+from pages.login import conn
 
 if "saved_user_name" not in st.session_state:
     st.session_state["saved_user_name"] = ""
