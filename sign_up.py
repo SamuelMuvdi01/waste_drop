@@ -65,30 +65,35 @@ else:
     email_valid = bool(re.match(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b', email_val))
     pass_valid = bool(re.match(r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$", password_val))
 
+    def email_exists(email):
+        cursor.execute("SELECT email FROM public.users WHERE email ilike %s;", (email,))
+        return cursor.fetchone() is not None
 
     def get_all_emails():
-        cursor.execute("SELECT email FROM public.users WHERE email ilike '{}';".format(email_val))
-        return cursor.fetchone()
-
+        cursor.execute("SELECT email FROM public.users WHERE email ilike %s;", (email_val,))
+        return cursor.fetchall()
 
     if create_user_button:
         if pass_valid and len(last_name_val) > 2 and len(first_name_val) > 2 and email_valid:
-            hashed_password ="SHA-512:" + hashlib.sha512(password_val.encode('utf-8')).hexdigest()
+            hashed_password = "SHA-512:" + hashlib.sha512(password_val.encode('utf-8')).hexdigest()
             try:
-                cursor.execute("INSERT INTO public.users(email, first_name, last_name, password) VALUES('{}', '{}', '{}', '{}')".format(email_val, hf.capitalize(first_name_val), hf.capitalize(last_name_val), hashed_password))
-                conn.commit()
-                st.write(":green[Account created!]")
-            except:
-                if(email_val in get_all_emails()):
-                    st.error(":red[This email already is in use!]")
+                existing_emails = get_all_emails()
+                if any(email_val in row for row in existing_emails):
+                    st.error(":red[This email is already in use!]")
                 else:
-                    st.error(":red[One of the fields above are invalid!]")
-    
-        if(pass_valid==False):
-                st.error(":red[Oops! The password isnt strong enough, please check the question mark for criteria!]")
-        if(email_valid == False):
-                st.error(":red[Oops! The email is not complete!]")
-        if(len(first_name_val) < 2):
+                    cursor.execute("INSERT INTO public.users(email, first_name, last_name, password) VALUES(%s, %s, %s, %s);",
+                                   (email_val, hf.capitalize(first_name_val), hf.capitalize(last_name_val), hashed_password))
+                    conn.commit()
+                    st.write(":green[Account created!]")
+            except Exception as e:
+                print(f"Error during user creation: {e}")
+                st.error(":red[Error creating the account. Please try again later.]")
+
+        if pass_valid is False:
+            st.error(":red[Oops! The password isn't strong enough, please check the question mark for criteria!]")
+        if email_valid is False:
+            st.error(":red[Oops! The email is not complete!]")
+        if len(first_name_val) < 2:
             st.error(":red[Please enter a valid first name!]")
-        if(len(last_name_val) < 2):
+        if len(last_name_val) < 2:
             st.error(":red[Please enter a valid last name!]")
